@@ -16,21 +16,21 @@ namespace Ackerfe
 
 		}
 		else
-			Ackerfe::throwError("Inizializzazione", "Il file di inizializzazione manca o è corrotto");
+			Ackerfe::throwFileError("Inizializzazione", "Il file di inizializzazione manca o è corrotto");
 
 		return returnVector;
 	}
 
 	std::string Ackerfe::readInitFileLine(unsigned int lineNumber)
 	{
-		std::string returnString;
+		std::string returnString = "";
 		std::ifstream initFile("Ini.txt");
 		if (initFile.is_open())
 			for (unsigned int i = 0; i < lineNumber; i++)
 				getline(initFile, returnString);
 			
 		else
-			Ackerfe::throwError("Inizializzazione", "Il file di inizializzazione manca o è corrotto");
+			Ackerfe::throwFileError("Inizializzazione","Il file di inizializzazione manca o è corrotto");
 
 		return returnString;
 	}
@@ -43,7 +43,7 @@ namespace Ackerfe
 				initFile << initContents[i] << std::endl;
 		
 		else
-			Ackerfe::throwError("Inizializzazione", "Non è stato possibile creare il file di inizializzazione");
+			Ackerfe::throwFileError("Inizializzazione", "Non è stato possibile creare il file di inizializzazione");
 		
 	}
 
@@ -67,7 +67,7 @@ namespace Ackerfe
 			}
 
 		else
-			Ackerfe::throwError("Inizializzazione", "Il file di inizializzazione manca o è corrotto");
+			Ackerfe::throwFileError("Inizializzazione", "Il file di inizializzazione manca o è corrotto");
 
 		writeInitFile(tempFile);
 	}

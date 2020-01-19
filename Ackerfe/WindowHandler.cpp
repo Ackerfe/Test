@@ -31,8 +31,9 @@ namespace Ackerfe
 
 		msdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, getScreenWidth(), getScreenHeight(), flags);
 		SDL_GLContext glContext = SDL_GL_CreateContext(msdlWindow);
+		glewInit();
 		glClearDepth(1.0);
-		
+		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
 		
 		return 0;
 	}
