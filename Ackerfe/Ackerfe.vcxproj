@@ -178,19 +178,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AckerfeErrorHandler.h" />
+    <ClInclude Include="BMPLoader.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IAppState.h" />
     <ClInclude Include="InitFileReadWrite.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Logostate.h" />
+    <ClInclude Include="SimpleShader.h" />
+    <ClInclude Include="Square.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="WindowHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ackerfe.h" />
     <ClCompile Include="AckerfeErrorHandler.cpp" />
+    <ClCompile Include="BMPLoader.cpp" />
     <ClCompile Include="InitFileReadWrite.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Logostate.cpp" />
+    <ClCompile Include="SimpleShader.cpp" />
+    <ClCompile Include="Square.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="WindowHandler.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
