@@ -1,5 +1,5 @@
 #include "Square.h"
-#include "BMPLoader.h"
+#include "ImageLoad.h"
 namespace Ackerfe
 {
 
@@ -21,18 +21,26 @@ namespace Ackerfe
 		glBindBuffer(GL_ARRAY_BUFFER, mVboID);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vboData), vboData, GL_STATIC_DRAW);
 
-		mTexture = Ackerfe::AckerfeBMPLoader(textureFilePath);
+		mTexture = Ackerfe::loadPNG(textureFilePath);
 		glGenBuffers(1, &mUVBuffer);
 
 		glBindBuffer(GL_ARRAY_BUFFER, mUVBuffer);
 		static const GLfloat uvData[] =
 		{
+			0.0f, 1.0f,
+			0.0f, 0.0f,
+			1.0f, 1.0f,		/*PNG uv Coordinates*/
+			0.0f, 0.0f,
+			1.0f, 0.0f,
+			1.0f, 1.0f
+
+			/*
 			0.0f, 0.0f,
 			0.0f, 1.0f,
-			1.0f, 0.0f,
+			1.0f, 0.0f,		Bitmap uv coordinates
 			0.0f, 1.0f,
 			1.0f, 1.0f,
-			1.0f, 0.0f
+			1.0f, 0.0f */
 		};
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(uvData), uvData, GL_STATIC_DRAW);

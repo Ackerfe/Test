@@ -25,7 +25,7 @@ int main(int argc, char** argv)
 
 	bool doQuit = false;
 
-	Ackerfe::Square square("Texture/TWO.bmp");
+	Ackerfe::Square square("Texture/THREE.png");
 	Ackerfe::Triangle triangle;
 
 	GLuint programID = Ackerfe::compileLinkSimpleShaders("TextureVert.vert", "TextureFrag.frag");
@@ -36,9 +36,7 @@ int main(int argc, char** argv)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(programID);
 		square.textureDraw();
-		glUseProgram(secondProgramID);
-		triangle.draw();
-		glUseProgram(0);
+		
 		newInput.inputQueue();
 		
 		if (newInput.isKeyDown(SDLK_w))
@@ -48,9 +46,7 @@ int main(int argc, char** argv)
 		else {
 			newWindow.swapBuffer();
 		}
-		
-
-		
+			
 	};
 	return 0;
 }
