@@ -1,5 +1,5 @@
 #include "InputHandler.h"
-#include "AckerfeErrorHandler.h"
+#include "ErrHandler.h"
 
 namespace Ackerfe
 {

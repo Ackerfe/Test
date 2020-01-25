@@ -1,5 +1,5 @@
 #include "ImageLoad.h"
-#include "AckerfeErrorHandler.h"
+#include "ErrHandler.h"
 #include <stdio.h>
 #include "PicoPNG.h"
 

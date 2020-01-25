@@ -177,26 +177,29 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AckerfeErrorHandler.h" />
+    <ClInclude Include="ErrHandler.h" />
     <ClInclude Include="ImageLoad.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IAppState.h" />
     <ClInclude Include="InitFileReadWrite.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Logostate.h" />
+    <ClInclude Include="MultiSprite.h" />
     <ClInclude Include="PicoPNG.h" />
     <ClInclude Include="SimpleShader.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="Vertex.h" />
     <ClInclude Include="WindowHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ackerfe.h" />
-    <ClCompile Include="AckerfeErrorHandler.cpp" />
+    <ClCompile Include="ErrHandler.cpp" />
     <ClCompile Include="ImageLoad.cpp" />
     <ClCompile Include="InitFileReadWrite.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Logostate.cpp" />
+    <ClCompile Include="MultiSprite.cpp" />
     <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="SimpleShader.cpp" />
     <ClCompile Include="Square.cpp" />

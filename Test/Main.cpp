@@ -4,7 +4,10 @@
 #include "Triangle.h"
 #include "SimpleShader.h"
 #include "Square.h"
-#include "AckerfeErrorHandler.h"
+#include "ErrHandler.h"
+#include "MultiSprite.h"
+#include "ImageLoad.h"
+#include "Vertex.h"
 
 /*temporary*/
 #include <iostream>
@@ -25,27 +28,44 @@ int main(int argc, char** argv)
 
 	bool doQuit = false;
 
-	Ackerfe::Square square("Texture/THREE.png");
+	Ackerfe::Square square("Texture/test.png");
 	Ackerfe::Triangle triangle;
 
 	GLuint programID = Ackerfe::compileLinkSimpleShaders("TextureVert.vert", "TextureFrag.frag");
 	GLuint secondProgramID = Ackerfe::compileLinkSimpleShaders("SimpleVert.vert", "SimpleFrag.frag");
 
+	Ackerfe::MultiSprite multiSprite;
+	multiSprite.init();
+	
+	Vertex test = Vertex(0.0f, 0.0f, 0.0f, 1.0f);
+	Vertex test2 = Vertex(0.0f, 1.0f, 0.0f, 0.0f);
+	Vertex test3 = Vertex(1.0f, 0.0f, 1.0f, 1.0f);
+	Vertex test4 = Vertex(1.0f, 1.0f, 1.0f, 0.0f);
+	GLuint textureID = Ackerfe::loadPng("Texture/test.png");
+	GLuint textureID2 = Ackerfe::loadBmp("Texture/TWO.bmp");
+
+	multiSprite.addSprite(textureID, 0.0f, test, test2, test3, test4);
+
+	
+	multiSprite.prepareBatches();
+	
 	while (!doQuit) 
 	{
+		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(programID);
-		square.textureDraw();
+		//square.textureDraw();
+		multiSprite.renderBatches();
+		//glUseProgram(secondProgramID);
+		glUseProgram(0);
 		
 		newInput.inputQueue();
 		
-		if (newInput.isKeyDown(SDLK_w))
-		{
+		if (newInput.isKeyDown(SDLK_ESCAPE))
 			doQuit = true;
-		}
-		else {
-			newWindow.swapBuffer();
-		}
+		
+		newWindow.swapBuffer();
+		
 			
 	};
 	return 0;

@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <fstream>
 #include <vector>
-#include "AckerfeErrorHandler.h"
+#include "ErrHandler.h"
 
 namespace Ackerfe 
 {
