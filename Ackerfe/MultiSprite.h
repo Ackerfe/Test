@@ -1,12 +1,41 @@
 #pragma once
 #include <GL/glew.h>
+#include <glm-0.9.9.7/glm/glm.hpp>
 #include <vector>
 #include <algorithm>
 #include "ErrHandler.h"
-#include "Vertex.h"
+
 namespace Ackerfe
 {
 	
+	struct ColourRGBA8
+	{
+		ColourRGBA8() : mR(255), mG(255), mB(255), mA(255) {}
+		ColourRGBA8(GLubyte r, GLubyte g, GLubyte b, GLubyte a) : mR(r), mG(g), mB(b), mA(a) {}
+
+		GLubyte mR;
+		GLubyte mG;
+		GLubyte mB;
+		GLubyte mA;
+	};
+
+	struct Vertex
+	{
+	
+		Vertex() {}
+		Vertex(float x, float y, float z, float u, float v,  ColourRGBA8 colour)
+			:mX(x), mY(y), mZ(z), mU(u), mV(v), mColour(colour) {}
+
+		float mX = 0.0f;
+		float mY = 0.0f;
+		float mZ = 0.0f;
+		float mU = 0.0f;
+		float mV = 0.0f;
+		
+
+		ColourRGBA8 mColour;
+
+	};
 
 	struct Sprite
 	{
@@ -52,11 +81,12 @@ namespace Ackerfe
 
 		void init();
 		void clearCache();
-		void addSprite(GLuint textureID, float depth,  Vertex &bottomLeft, Vertex &topLeft, Vertex &bottomRight, Vertex &topRight)
+		void addSprite(GLuint textureID, float depth,  Vertex bottomLeft, Vertex topLeft, Vertex bottomRight, Vertex topRight)
 		{
 			mSprites.emplace_back(textureID, depth, bottomLeft, topLeft, bottomRight, topRight);
 		}
 		void prepareBatches();
 		void renderBatches();
+		void addSprite(glm::vec4 destRect, glm::vec4 uvRect, unsigned int textureID, float depth, ColourRGBA8 colour);
 	};
 }

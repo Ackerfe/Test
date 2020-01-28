@@ -25,10 +25,13 @@ namespace Ackerfe {
 		glBindBuffer(GL_ARRAY_BUFFER, mVbo);
 
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,mX));
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,mX));
 
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex,mU));
+
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, mColour));
 
 		glBindVertexArray(0);
 	}
@@ -75,7 +78,7 @@ namespace Ackerfe {
 		for (size_t currentSprite = 1; currentSprite < mSortingSprites.size(); currentSprite++)
 		{
 			if (mSortingSprites[currentSprite]->mTextureID != mSortingSprites[currentSprite - 1]->mTextureID) {
-				mSpriteBatches.emplace_back(mSortingSprites[0]->mTextureID, 6, currentOffset);
+				mSpriteBatches.emplace_back(mSortingSprites[currentSprite]->mTextureID, 6, currentOffset);
 			}
 
 			else {
@@ -114,12 +117,22 @@ namespace Ackerfe {
 		
 		for (unsigned int i = 0; i < mSpriteBatches.size(); i++)
 		{
-			std::cout << mSpriteBatches[i].mTextureID;
+			
 			glBindTexture(GL_TEXTURE_2D, mSpriteBatches[i].mTextureID);
 			glDrawArrays(GL_TRIANGLES, mSpriteBatches[i].mOffset, mSpriteBatches[i].mNumVertices);
 		}
 		
 		glBindVertexArray(0);
+	}
+
+	void MultiSprite::addSprite(glm::vec4 destRect, glm::vec4 uvRect, unsigned int textureID, float depth, ColourRGBA8 colour)
+	{
+		Vertex bottomLeft(destRect.x, destRect.y, depth, uvRect.x, uvRect.y, colour);
+		Vertex bottomRight(destRect.x + destRect.z, destRect.y, depth, uvRect.x + uvRect.z, uvRect.y, colour);
+		Vertex topLeft(destRect.x, destRect.y + destRect.w, depth, uvRect.x, uvRect.y + uvRect.w, colour);
+		Vertex topRight(destRect.x + destRect.z, destRect.y + destRect.w, depth, uvRect.x + uvRect.z, uvRect.y + uvRect.w, colour);
+
+		mSprites.emplace_back(textureID, depth, bottomLeft, topLeft, bottomRight, topRight);
 	}
 
 }
