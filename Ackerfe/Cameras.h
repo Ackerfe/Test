@@ -34,6 +34,9 @@ namespace Ackerfe
 	public:
 		Camera3D(int screenWidth, int screenHeight, glm::vec3 position, glm::vec3 lookAt, float fieldOfView, float near, float far);
 		~Camera3D();
-		glm::mat4 getMatrix() { return mPerspectiveProj; }
+		glm::mat4 getPerspectiveMatrix() { return mPerspectiveProj; }
+		glm::mat4 getCameraMatrix() { return mCameraMatrix; }
+		glm::mat4 getModelMatrix() { return mModelMatrix; }
+
 	};
 }

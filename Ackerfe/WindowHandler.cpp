@@ -33,7 +33,7 @@ namespace Ackerfe
 		SDL_GLContext glContext = SDL_GL_CreateContext(msdlWindow);
 		glewInit();
 		glClearDepth(1.0);
-		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.5f);
 
 		
 		//glEnable(GL_BLEND);
