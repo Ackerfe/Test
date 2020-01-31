@@ -31,9 +31,12 @@ namespace Ackerfe
 		int mScreenHeight;
 
 	public:
+		Camera2D() {}
 		Camera2D(int screenWidth, int screenHeight, glm::vec2 position, float scale);
 		~Camera2D();
 		glm::mat4 getMatrix() { return mOrthoProj; }
+
+		void init(int screenWidth, int screenHeight, glm::vec2 position, float scale);
 	};
 
 	class Camera3D

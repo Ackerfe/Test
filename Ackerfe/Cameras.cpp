@@ -16,6 +16,22 @@ namespace Ackerfe
 	Camera2D::~Camera2D()
 	{
 	}
+
+	void Camera2D::init(int screenWidth, int screenHeight, glm::vec2 position, float scale)
+	{
+		mScreenWidth = screenWidth;
+		mScreenHeight = screenHeight;
+		mPosition = position; 
+		mScale = scale;
+
+		mOrthoMatrix = glm::ortho(0.0f, (float)mScreenWidth, 0.0f, (float)mScreenHeight);
+
+		mOrthoProj = glm::translate(mOrthoMatrix, glm::vec3(mPosition.x, mPosition.y, 0.0f));
+
+		glm::vec3 scaling(mScale, mScale, 0.0f);
+
+		mOrthoProj = glm::scale(glm::mat4(1.0f), scaling) * mOrthoProj;
+	}
 	
 	Camera3D::Camera3D(int screenWidth, int screenHeight, glm::vec3 position, glm::vec3 lookAt, float fieldOfView, float near, float far, glm::vec3 cameraRoll)
 		:  mPosition(position), mLookAtPosition(lookAt), mScreenRatio(screenWidth / screenHeight), mFieldOfView(fieldOfView), mNearClippingDistance(near), mFarClippingDistance(far),  mCameraRoll(cameraRoll)

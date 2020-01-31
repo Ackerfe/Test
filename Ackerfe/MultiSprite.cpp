@@ -118,8 +118,8 @@ namespace Ackerfe {
 		
 		glBindVertexArray(mVao);
 
-		GLuint queryID;
-		glGenQueries(1, &queryID);
+		//GLuint queryID;
+		//glGenQueries(1, &queryID);
 	
 		
 		for (unsigned int i = 0; i < mSpriteBatches.size(); i++)
@@ -127,21 +127,20 @@ namespace Ackerfe {
 		
 			glBindTexture(GL_TEXTURE_2D, mSpriteBatches[i].mTextureID);
 
-			glBeginQuery(GL_SAMPLES_PASSED, queryID);
+			//glBeginQuery(GL_SAMPLES_PASSED, queryID);
 
 			glDrawArrays(GL_TRIANGLES, mSpriteBatches[i].mOffset, mSpriteBatches[i].mNumVertices);
 
-			glEndQuery(GL_SAMPLES_PASSED);
+			//glEndQuery(GL_SAMPLES_PASSED);
 
-			GLuint query = GL_FALSE;
+			/*GLuint query = GL_FALSE;
 
 			while (query == GL_FALSE) {
 				glGetQueryObjectuiv(queryID, GL_QUERY_RESULT_AVAILABLE, &query);
 			}
 
-			glGetQueryObjectuiv(queryID, GL_QUERY_RESULT, &query);
+			glGetQueryObjectuiv(queryID, GL_QUERY_RESULT, &query);*/
 
-			std::cout << "Sprite" << i << '\n' << query << '\n';
 			
 		}
 		
@@ -158,6 +157,14 @@ namespace Ackerfe {
 		Vertex topRight(destRect.x + destRect.z, destRect.y + destRect.w, depth, uvRect.x + uvRect.z, uvRect.y + uvRect.w, 0.0f, 0.0f, 1.0f, colour);
 
 		mSprites.emplace_back(textureID, depth, bottomLeft, topLeft, bottomRight, topRight);
+	}
+
+	void MultiSprite::setSpriteAlpha(int sprite, GLubyte newAlpha)
+	{
+		mSprites[sprite].mBottomLeft.mColour.mA = newAlpha;
+		mSprites[sprite].mTopLeft.mColour.mA = newAlpha;
+		mSprites[sprite].mBottomRight.mColour.mA = newAlpha;
+		mSprites[sprite].mTopRight.mColour.mA = newAlpha;
 	}
 
 }

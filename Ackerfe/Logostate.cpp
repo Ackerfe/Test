@@ -9,11 +9,6 @@ namespace Ackerfe {
 	{
 	}
 
-	void LogoState::update()
-	{
-	}
+	
 
-	void LogoState::render()
-	{
-	}
 }

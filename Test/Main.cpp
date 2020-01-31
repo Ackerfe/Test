@@ -10,6 +10,7 @@
 #include "SpriteFont.h"
 #include "Acube.h"
 #include "SpatialSceneGraphOct.h"
+#include "GameLogo.h"
 
 
 /*temporary*/
@@ -27,6 +28,10 @@ int main(int argc, char** argv)
 	Ackerfe::WindowHandler newWindow;
 	newWindow.createWindow("Window", 1000, 1000, 0);
 
+	GameLogo gameLogo;
+	gameLogo.init("Logo.vert", "Logo.frag", 1000, 1000, glm::vec2 (0.0f,0.0f), 1.0f, &newWindow);
+	gameLogo.logoUpdateRenderLoop();
+
 	Ackerfe::InputHandler newInput;
 
 
@@ -39,7 +44,6 @@ int main(int argc, char** argv)
 	GLuint secondProgramID = Ackerfe::compileLinkSimpleShaders("SimpleVert.vert", "SimpleFrag.frag");
 
 	GLint shaderPerspectiveID = glGetUniformLocation(programID, "Perspective");
-
 	GLint shaderCameraMatrixID = glGetUniformLocation(programID, "CameraMatrix");
 	GLint shaderModelMatrixID = glGetUniformLocation(programID, "ModelMatrix");
 	GLint shaderLightPositionID = glGetUniformLocation(programID, "LightPosition");
@@ -57,7 +61,7 @@ int main(int argc, char** argv)
 	//spriteFont.draw(multiSprite3, buffer, glm::vec2(0.0f, 0.1f), glm::vec2(1.0f), 0.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255));
 
 	Ackerfe::Camera2D camera2D(1000, 1000, glm::vec2(0.0f,0.0f), 1.0f);
-	glm::mat4 ortho = camera2D.getMatrix();
+	
 
 	Ackerfe::Camera3D camera3D(512, 512, glm::vec3(10.0f,10.0f,50.0f), glm::vec3(23.0f, 23.0f, 23.0f), 45.0f, 2.0f, 30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 perspective = camera3D.getPerspectiveMatrix();
@@ -66,7 +70,7 @@ int main(int argc, char** argv)
 	glm::mat4 modelCameraMatrix = modelMatrix * cameraMatrix;
 	 
 
-	Ackerfe::MultiSprite multiSprite;
+	/*Ackerfe::MultiSprite multiSprite;
 	multiSprite.init();
 	
 	Ackerfe::Vertex test = Ackerfe::Vertex(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255));
@@ -76,10 +80,14 @@ int main(int argc, char** argv)
 	GLuint textureID = Ackerfe::loadPng("Texture/test.png");
 	GLuint textureID2 = Ackerfe::loadBmp("Texture/TWO.bmp");
 
-	multiSprite.addSprite(textureID, 0.0f, test, test2, test3, test4);
+	multiSprite.addSprite(textureID, 0.0f,
+	Ackerfe::Vertex(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255)),
+	Ackerfe::Vertex(0.0f, 100.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255)),
+	Ackerfe::Vertex(100.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255)),
+	Ackerfe::Vertex(100.0f, 100.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255)));
 
 	
-	multiSprite.prepareBatches();
+	multiSprite.prepareBatches();*/
 
 	Ackerfe::MultiSprite multiSprite2;
 	multiSprite2.init();
