@@ -147,7 +147,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;%(AdditionalDependencies);SDL2_ttf.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/lib/Release/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -177,6 +177,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ACube.h" />
     <ClInclude Include="Cameras.h" />
     <ClInclude Include="ErrHandler.h" />
     <ClInclude Include="ImageLoad.h" />
@@ -188,6 +189,8 @@
     <ClInclude Include="MultiSprite.h" />
     <ClInclude Include="PicoPNG.h" />
     <ClInclude Include="SimpleShader.h" />
+    <ClInclude Include="SpatialEntity.h" />
+    <ClInclude Include="SpatialSceneGraphOct.h" />
     <ClInclude Include="Spritefont.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Triangle.h" />
@@ -196,6 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ackerfe.h" />
+    <ClCompile Include="ACube.cpp" />
     <ClCompile Include="Cameras.cpp" />
     <ClCompile Include="ErrHandler.cpp" />
     <ClCompile Include="ImageLoad.cpp" />
@@ -205,6 +209,8 @@
     <ClCompile Include="MultiSprite.cpp" />
     <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="SimpleShader.cpp" />
+    <ClCompile Include="SpatialEntity.cpp" />
+    <ClCompile Include="SpatialSceneGraphOct.cpp" />
     <ClCompile Include="Spritefont.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="Triangle.cpp" />

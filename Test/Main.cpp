@@ -8,6 +8,8 @@
 #include "MultiSprite.h"
 #include "ImageLoad.h"
 #include "SpriteFont.h"
+#include "Acube.h"
+#include "SpatialSceneGraphOct.h"
 
 
 /*temporary*/
@@ -46,18 +48,18 @@ int main(int argc, char** argv)
 	GLint shaderLightIntensityID = glGetUniformLocation(programID, "LightIntensity");
 
 
-	Ackerfe::MultiSprite multiSprite3;
-	multiSprite3.init();
-	Ackerfe::SpriteFont spriteFont("Fonts/ThreSixt_2.ttf", 64);
+	//Ackerfe::MultiSprite multiSprite3;
+	//multiSprite3.init();
+	//Ackerfe::SpriteFont spriteFont("Fonts/ThreSixt_2.ttf", 64);
 	
-	char buffer[256];
-	sprintf_s(buffer, "Test String");
-	spriteFont.draw(multiSprite3, buffer, glm::vec2(0.0f, 0.1f), glm::vec2(1.0f), 0.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255));
+	//char buffer[256];
+	//sprintf_s(buffer, "Test String");
+	//spriteFont.draw(multiSprite3, buffer, glm::vec2(0.0f, 0.1f), glm::vec2(1.0f), 0.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255));
 
 	Ackerfe::Camera2D camera2D(1000, 1000, glm::vec2(0.0f,0.0f), 1.0f);
 	glm::mat4 ortho = camera2D.getMatrix();
 
-	Ackerfe::Camera3D camera3D(1000, 1000, glm::vec3(4.0f,4.0f,3.0f), glm::vec3(0.5f,0.5f,-2.5f), 45.0f, 0.1f, 1500.0f);
+	Ackerfe::Camera3D camera3D(512, 512, glm::vec3(10.0f,10.0f,50.0f), glm::vec3(23.0f, 23.0f, 23.0f), 45.0f, 2.0f, 30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	glm::mat4 perspective = camera3D.getPerspectiveMatrix();
 	glm::mat4 modelMatrix = camera3D.getModelMatrix();
 	glm::mat4 cameraMatrix = camera3D.getCameraMatrix();
@@ -82,96 +84,48 @@ int main(int argc, char** argv)
 	Ackerfe::MultiSprite multiSprite2;
 	multiSprite2.init();
 
-	//front
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/yellow (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
+	std::vector<Ackerfe::SpatialSceneGraphOct*> sceneGraphOctStack;
+	std::vector<Ackerfe::SpatialEntity*> spatialEntityStack;
+	float minSpace = -100.0f;
+	float maxSpace = 100.0f;
+	Ackerfe::SpatialSceneGraphOct spatialGraph(minSpace, maxSpace, minSpace, maxSpace, minSpace, maxSpace);
+	spatialGraph.createChildren();
+	sceneGraphOctStack.push_back(&spatialGraph);
 
-	//right
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/orange (2).png"), 0.0f,
-		Ackerfe::Vertex(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
-
-	//bottom
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/blue (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,-1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, -1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
-
-	//left
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/cyan (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
-
-	//back
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/purple (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
-
-	//top
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/green (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
+	std::vector<Ackerfe::ACube> cubes;
 
 
-	//second Cube
+	for (float i=10.0f; i<50.0f; i+=5.0f)
+	{
+		for (float j=10.0f; j<50.0f; j+=5.0f)
+		{
+			for (float k = 10.0f; k < 50.0f; k += 5.0f) 
+				spatialGraph.addEntityToGraph(new Ackerfe::ACube(glm::vec3(i, j, k), 1.0f, "Texture/purple.png", "Texture/green.png", "Texture/blue.png", "Texture/orange.png", "Texture/cyan.png", "Texture/yellow.png", &multiSprite2));
 
-	//front
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/yellow (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 0.0f, -2.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, -2.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, -2.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, -2.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
+			
+		}
+	}
+	
+	for (unsigned int i = 0; i < sceneGraphOctStack.size(); i++)
+	{
+		if (camera3D.isBoxInView(sceneGraphOctStack[i]->getPoints()));
+			sceneGraphOctStack[i]->addToStack(&spatialEntityStack, &sceneGraphOctStack);
+	}
 
-	//right
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/orange (2).png"), 0.0f,
-		Ackerfe::Vertex(1.0f, 0.0f, -2.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, -2.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, -3.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, -3.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
+	for (unsigned int i = 0; i < spatialEntityStack.size(); i++)
+	{
+		if (camera3D.isSphereInView(spatialEntityStack[i]->getPosition(), spatialEntityStack[i]->getCollisionRadius()))
+			spatialEntityStack[i]->renderEntity();
 
-	//bottom
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/blue (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 0.0f, -3.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 0.0f, -2.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, -3.0f, 1.0f, 1.0f, 0.0f, -1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, -2.0f, 1.0f, 0.0f, 0.0f, -1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
+	}
+	
+	
 
-	//left
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/cyan (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 0.0f, -3.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, -3.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 0.0f, -2.0f, 1.0f, 1.0f, -1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, -2.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
-
-	//back
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/purple (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 0.0f, -3.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, -3.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 0.0f, -3.0f, 1.0f, 1.0f, 0.0f, 0.0f, -1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, -3.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
-
-	//top
-	multiSprite2.addSprite(Ackerfe::loadPng("Texture/green (2).png"), 0.0f,
-		Ackerfe::Vertex(0.0f, 1.0f, -2.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(0.0f, 1.0f, -3.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, -2.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
-		Ackerfe::Vertex(1.0f, 1.0f, -3.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
+	
 
 
 	multiSprite2.prepareBatches();
-	multiSprite3.prepareBatches();
+	
 	
 	while (!doQuit) 
 	{
@@ -179,7 +133,7 @@ int main(int argc, char** argv)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(programID);
 		//square.textureDraw();
-		//glUniformMatrix4fv(location, 1, GL_FALSE, &camera2DMatrix[0][0]);
+		//glUniformMatrix4fv(shaderPerspectiveID, 1, GL_FALSE, &ortho[0][0]);
 		//multiSprite3.renderBatches();
 		//multiSprite.renderBatches();
 	
@@ -188,11 +142,13 @@ int main(int argc, char** argv)
 		glUniformMatrix4fv(shaderCameraMatrixID, 1, GL_FALSE, &cameraMatrix[0][0]);
 		glUniformMatrix4fv(shaderModelCameraMatrixID, 1, GL_FALSE, &modelCameraMatrix[0][0]);
 
-		glUniform3f(shaderLightPositionID, 2.0f, 1.5, -1.5f);
-		glUniform3f(shaderLightColourID, 1.0f, 1.0f, 1.0f);
-		glUniform1f(shaderLightIntensityID, 1.2f);
+		glUniform3f(shaderLightPositionID, 45.0f, 45.5, 45.5f);
+		glUniform3f(shaderLightColourID, 0.5f, 1.0f, 0.5f);
+		glUniform1f(shaderLightIntensityID, 450.5f);
+		
 
 		multiSprite2.renderBatches();
+		
 		//multiSprite3.renderBatches();
 		//glUseProgram(secondProgramID);
 		glUseProgram(0);
@@ -201,10 +157,64 @@ int main(int argc, char** argv)
 		
 		if (newInput.isKeyDown(SDLK_ESCAPE))
 			doQuit = true;
-		
+
+		if (newInput.isKeyDown(SDLK_w))
+		{
+			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, 0.10f, 0.0f));
+			newInput.unpressKey(SDLK_w);
+			perspective = camera3D.getPerspectiveMatrix();
+			modelMatrix = camera3D.getModelMatrix();
+			cameraMatrix = camera3D.getCameraMatrix();
+			modelCameraMatrix = modelMatrix * cameraMatrix;
+		}
+		if (newInput.isKeyDown(SDLK_d))
+		{
+			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.10f, 0.0f, 0.0f));
+			newInput.unpressKey(SDLK_d);
+			perspective = camera3D.getPerspectiveMatrix();
+			modelMatrix = camera3D.getModelMatrix();
+			cameraMatrix = camera3D.getCameraMatrix();
+			modelCameraMatrix = modelMatrix * cameraMatrix;
+		}
+		if (newInput.isKeyDown(SDLK_a))
+		{
+			camera3D.changePosition(camera3D.getPosition() + glm::vec3(-0.10f, 0.0f, 0.0f));
+			newInput.unpressKey(SDLK_a);
+			perspective = camera3D.getPerspectiveMatrix();
+			modelMatrix = camera3D.getModelMatrix();
+			cameraMatrix = camera3D.getCameraMatrix();
+			modelCameraMatrix = modelMatrix * cameraMatrix;
+		}
+		if (newInput.isKeyDown(SDLK_s))
+		{
+			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, -0.10f, 0.0f));
+			newInput.unpressKey(SDLK_s);
+			perspective = camera3D.getPerspectiveMatrix();
+			modelMatrix = camera3D.getModelMatrix();
+			cameraMatrix = camera3D.getCameraMatrix();
+			modelCameraMatrix = modelMatrix * cameraMatrix;
+		}
+		if (newInput.isKeyDown(SDLK_k))
+		{
+			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, 0.0f, -0.10f));
+			newInput.unpressKey(SDLK_k);
+			perspective = camera3D.getPerspectiveMatrix();
+			modelMatrix = camera3D.getModelMatrix();
+			cameraMatrix = camera3D.getCameraMatrix();
+			modelCameraMatrix = modelMatrix * cameraMatrix;
+		}
+		if (newInput.isKeyDown(SDLK_i))
+		{
+			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, 0.0f, 0.10f));
+			newInput.unpressKey(SDLK_i);
+			perspective = camera3D.getPerspectiveMatrix();
+			modelMatrix = camera3D.getModelMatrix();
+			cameraMatrix = camera3D.getCameraMatrix();
+			modelCameraMatrix = modelMatrix * cameraMatrix;
+		}
 		newWindow.swapBuffer();
 		
 			
-	};
+	}
 	return 0;
 }

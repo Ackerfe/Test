@@ -55,4 +55,8 @@ namespace Ackerfe
 			}
 		}
 	}
+	void InputHandler::unpressKey(unsigned int keyID)
+	{
+		mKeyMap[keyID] = false;
+	}
 }

@@ -32,7 +32,7 @@
 namespace Ackerfe {
 
 	struct GLTexture;
-	class SpriteBatch;
+	
 
 	struct CharGlyph {
 	public:

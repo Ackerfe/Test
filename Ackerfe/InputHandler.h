@@ -18,5 +18,8 @@ namespace Ackerfe
 		/*Ricorda i tasti premuti in modo che possano essere utilizzati dal programma in ordine*/
 		void inputQueue();
 
+		void unpressKey(unsigned int keyID);
+
+
 	};
 }

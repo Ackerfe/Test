@@ -79,6 +79,7 @@ namespace Ackerfe
 		GLuint mVao = 0;
 
 	public:
+		
 		MultiSprite();
 		~MultiSprite();
 
