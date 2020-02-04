@@ -11,6 +11,9 @@
 #include "Acube.h"
 #include "SpatialSceneGraphOct.h"
 #include "GameLogo.h"
+#include "GraphicsResourceManager.h"
+#include "GUI.h"
+#include "MainMenu.h"
 
 
 /*temporary*/
@@ -26,11 +29,21 @@ int main(int argc, char** argv)
 	float green = 0.0f;
 	float blue = 0.0f;
 	Ackerfe::WindowHandler newWindow;
-	newWindow.createWindow("Window", 1000, 1000, 0);
+	newWindow.createWindow("Window", 512, 512, 0);
+
+	Ackerfe::GraphicsResourceManager graphics;
 
 	GameLogo gameLogo;
-	gameLogo.init("Logo.vert", "Logo.frag", 1000, 1000, glm::vec2 (0.0f,0.0f), 1.0f, &newWindow);
+	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2 (0.0f,0.0f), 1.0f, &newWindow, &graphics);
 	gameLogo.logoUpdateRenderLoop();
+
+	std::string guiResource = "GUI";
+	Ackerfe::GUI gui;
+	gui.init(guiResource);
+
+	MainMenu mainMenu;
+	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui);
+	mainMenu.mainMenuLoop();
 
 	Ackerfe::InputHandler newInput;
 
@@ -54,12 +67,7 @@ int main(int argc, char** argv)
 
 	//Ackerfe::MultiSprite multiSprite3;
 	//multiSprite3.init();
-	//Ackerfe::SpriteFont spriteFont("Fonts/ThreSixt_2.ttf", 64);
 	
-	//char buffer[256];
-	//sprintf_s(buffer, "Test String");
-	//spriteFont.draw(multiSprite3, buffer, glm::vec2(0.0f, 0.1f), glm::vec2(1.0f), 0.0f, Ackerfe::ColourRGBA8(255, 100, 100, 255));
-
 	Ackerfe::Camera2D camera2D(1000, 1000, glm::vec2(0.0f,0.0f), 1.0f);
 	
 

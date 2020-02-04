@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Test\Dependencies\cegui-0.8.7\samples\Minesweeper\Minesweeper_Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Test\Dependencies\cegui-0.8.7\samples\Minesweeper\Sample_Minesweeper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Test\Dependencies\cegui-0.8.7\samples\Minesweeper\Minesweeper_Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Test\Dependencies\cegui-0.8.7\samples\common\include\Sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Test\Dependencies\cegui-0.8.7\samples\common\include\SampleBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Test\Dependencies\cegui-0.8.7\samples\Minesweeper\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{203D074C-481B-34EC-BAF7-B3D64E4DC38F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0C844BEA-8921-3BB6-9830-1D32F499055C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

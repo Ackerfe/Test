@@ -122,7 +122,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;%(AdditionalDependencies);SDL2_ttf.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;%(AdditionalDependencies);SDL2_ttf.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/lib/Debug/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -147,7 +147,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;SDL2_ttf.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/lib/Release/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -180,6 +180,8 @@
     <ClInclude Include="ACube.h" />
     <ClInclude Include="Cameras.h" />
     <ClInclude Include="ErrHandler.h" />
+    <ClInclude Include="GraphicsResourceManager.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="ImageLoad.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IAppState.h" />
@@ -202,6 +204,8 @@
     <ClCompile Include="ACube.cpp" />
     <ClCompile Include="Cameras.cpp" />
     <ClCompile Include="ErrHandler.cpp" />
+    <ClCompile Include="GraphicsResourceManager.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="ImageLoad.cpp" />
     <ClCompile Include="InitFileReadWrite.cpp" />
     <ClCompile Include="InputHandler.cpp" />

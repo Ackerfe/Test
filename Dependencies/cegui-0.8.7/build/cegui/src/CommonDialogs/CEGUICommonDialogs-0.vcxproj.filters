@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Test\Dependencies\cegui-0.8.7\cegui\src\CommonDialogs\Module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Test\Dependencies\cegui-0.8.7\cegui\src\CommonDialogs\ColourPicker\ColourPicker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Test\Dependencies\cegui-0.8.7\cegui\src\CommonDialogs\ColourPicker\Controls.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Test\Dependencies\cegui-0.8.7\cegui\src\CommonDialogs\ColourPicker\Conversions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Test\Dependencies\cegui-0.8.7\cegui\src\CommonDialogs\ColourPicker\Types.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\CommonDialogs\Module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\CommonDialogs\ColourPicker\ColourPicker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\CommonDialogs\ColourPicker\Controls.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\CommonDialogs\ColourPicker\Conversions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\CommonDialogs\ColourPicker\Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Test\Dependencies\cegui-0.8.7\cegui\src\CommonDialogs\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{203D074C-481B-34EC-BAF7-B3D64E4DC38F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0C844BEA-8921-3BB6-9830-1D32F499055C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

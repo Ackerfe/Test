@@ -74,8 +74,7 @@ namespace Ackerfe {
 		vertices[currentVertex++] = mSortingSprites[0]->mBottomRight;
 		vertices[currentVertex++] = mSortingSprites[0]->mTopRight;
 		vertices[currentVertex++] = mSortingSprites[0]->mTopLeft;
-		std::cout << mSortingSprites[0]->mBottomLeft.mV;
-
+		
 		currentOffset += 6;
 
 		for (size_t currentSprite = 1; currentSprite < mSortingSprites.size(); currentSprite++)
@@ -89,8 +88,6 @@ namespace Ackerfe {
 			}
 
 			vertices[currentVertex++] = mSortingSprites[currentSprite]->mTopLeft;
-			std::cout << currentSprite;
-			std::cout << mSortingSprites[currentSprite]->mTopLeft.mY;
 			vertices[currentVertex++] = mSortingSprites[currentSprite]->mBottomLeft;
 			vertices[currentVertex++] = mSortingSprites[currentSprite]->mBottomRight;
 			vertices[currentVertex++] = mSortingSprites[currentSprite]->mBottomRight;

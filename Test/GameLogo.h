@@ -1,7 +1,7 @@
 #pragma once
 
 #include <math.h>
-#include "MultiSprite.h"
+#include "GraphicsResourceManager.h"
 #include "SimpleShader.h"
 #include "ImageLoad.h"
 #include "Cameras.h"
@@ -13,7 +13,7 @@ class GameLogo
 
 public:
 
-	void init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Ackerfe::WindowHandler* window);
+	void init(std::string vertShader, std::string fragShader, int screenWidth, int screenHeight, glm::vec2 cameraPosition, float cameraZoom, Ackerfe::WindowHandler* window, Ackerfe::GraphicsResourceManager* graphics);
 	void logoUpdateRenderLoop();
 	void render();
 
@@ -23,7 +23,7 @@ private:
 	int mScreenHeight;
 	GLuint mProgramID;
 	Ackerfe::Camera2D mCamera;
-	Ackerfe::MultiSprite mMultiSprite;
+	Ackerfe::GraphicsResourceManager* mGraphics;
 	GLint mPerspectiveUniformID;
 	glm::mat4 mOrthoMatrix;
 	Ackerfe::WindowHandler* mWindow;

@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{191A2723-961E-330D-8E37-96626A1DF7C6}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Test\Dependencies\cegui-0.8.7\build\cegui\include;C:\Test\Dependencies\cegui-0.8.7\cegui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Test\Dependencies\cegui-0.8.7\build\cegui\include;C:\Test\Dependencies\cegui-0.8.7\cegui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Test\Dependencies\cegui-0.8.7\build\cegui\include;C:\Test\Dependencies\cegui-0.8.7\cegui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Test\Dependencies\cegui-0.8.7\build\cegui\include;C:\Test\Dependencies\cegui-0.8.7\cegui\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Test\Dependencies\cegui-0.8.7\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Test/Dependencies/cegui-0.8.7/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Test/Dependencies/cegui-0.8.7 -BC:/Test/Dependencies/cegui-0.8.7/build --check-stamp-file C:/Test/Dependencies/cegui-0.8.7/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeFindFrameworks.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindDoxygen.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindGTK2.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindLibXml2.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPythonLibs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.16\Templates\CPackConfig.cmake.in;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeCCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeCXXCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeRCCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeSystem.cmake;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\Config.h.in;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\ModuleConfig.h.in;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\Version.h.in;C:\Test\Dependencies\cegui-0.8.7\cmake\CEGUIFindHelpers.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\CEGUIMacros.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindCorona.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindD3DX11Effects.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDevIL.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDirectFB.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDirectXSDK.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindEXPAT.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindEpoxy.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFreeImage.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFreetype.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFribidi.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLEW.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLFW.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLFW3.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLM.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindIrrlicht.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindLua51.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindMinizip.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOIS.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOgre.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOpenGLES.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPCRE.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPVRTools.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPythonVersion.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindRapidXML.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSDL2.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSDL2_image.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSILLY.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindTOLUAPP.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindTinyXML.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindXercesC.cmake;C:\Test\Dependencies\cegui-0.8.7\doc\doxygen\doxyfile.in;C:\Test\Dependencies\cegui-0.8.7\samples\common\include\CEGUISamplesConfig.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Test/Dependencies/cegui-0.8.7/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Test/Dependencies/cegui-0.8.7 -BC:/Test/Dependencies/cegui-0.8.7/build --check-stamp-file C:/Test/Dependencies/cegui-0.8.7/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeFindFrameworks.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindDoxygen.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindGTK2.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindLibXml2.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPythonLibs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.16\Templates\CPackConfig.cmake.in;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeCCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeCXXCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeRCCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeSystem.cmake;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\Config.h.in;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\ModuleConfig.h.in;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\Version.h.in;C:\Test\Dependencies\cegui-0.8.7\cmake\CEGUIFindHelpers.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\CEGUIMacros.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindCorona.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindD3DX11Effects.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDevIL.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDirectFB.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDirectXSDK.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindEXPAT.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindEpoxy.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFreeImage.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFreetype.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFribidi.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLEW.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLFW.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLFW3.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLM.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindIrrlicht.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindLua51.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindMinizip.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOIS.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOgre.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOpenGLES.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPCRE.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPVRTools.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPythonVersion.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindRapidXML.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSDL2.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSDL2_image.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSILLY.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindTOLUAPP.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindTinyXML.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindXercesC.cmake;C:\Test\Dependencies\cegui-0.8.7\doc\doxygen\doxyfile.in;C:\Test\Dependencies\cegui-0.8.7\samples\common\include\CEGUISamplesConfig.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Test/Dependencies/cegui-0.8.7/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Test/Dependencies/cegui-0.8.7 -BC:/Test/Dependencies/cegui-0.8.7/build --check-stamp-file C:/Test/Dependencies/cegui-0.8.7/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeFindFrameworks.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindDoxygen.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindGTK2.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindLibXml2.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPythonLibs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.16\Templates\CPackConfig.cmake.in;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeCCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeCXXCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeRCCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeSystem.cmake;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\Config.h.in;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\ModuleConfig.h.in;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\Version.h.in;C:\Test\Dependencies\cegui-0.8.7\cmake\CEGUIFindHelpers.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\CEGUIMacros.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindCorona.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindD3DX11Effects.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDevIL.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDirectFB.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDirectXSDK.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindEXPAT.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindEpoxy.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFreeImage.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFreetype.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFribidi.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLEW.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLFW.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLFW3.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLM.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindIrrlicht.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindLua51.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindMinizip.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOIS.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOgre.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOpenGLES.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPCRE.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPVRTools.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPythonVersion.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindRapidXML.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSDL2.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSDL2_image.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSILLY.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindTOLUAPP.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindTinyXML.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindXercesC.cmake;C:\Test\Dependencies\cegui-0.8.7\doc\doxygen\doxyfile.in;C:\Test\Dependencies\cegui-0.8.7\samples\common\include\CEGUISamplesConfig.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Test/Dependencies/cegui-0.8.7/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Test/Dependencies/cegui-0.8.7 -BC:/Test/Dependencies/cegui-0.8.7/build --check-stamp-file C:/Test/Dependencies/cegui-0.8.7/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeDependentOption.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeFindFrameworks.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CPack.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CPackComponent.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindBoost.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindDoxygen.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindGTK2.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindLibXml2.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindOpenGL.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPkgConfig.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPythonInterp.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindPythonLibs.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\Platform\WindowsPaths.cmake;C:\Program Files\CMake\share\cmake-3.16\Modules\SelectLibraryConfigurations.cmake;C:\Program Files\CMake\share\cmake-3.16\Templates\CPackConfig.cmake.in;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeCCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeCXXCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeRCCompiler.cmake;C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\3.16.3\CMakeSystem.cmake;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\Config.h.in;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\ModuleConfig.h.in;C:\Test\Dependencies\cegui-0.8.7\cegui\include\CEGUI\Version.h.in;C:\Test\Dependencies\cegui-0.8.7\cmake\CEGUIFindHelpers.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\CEGUIMacros.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindCorona.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindD3DX11Effects.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDevIL.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDirectFB.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindDirectXSDK.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindEXPAT.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindEpoxy.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFreeImage.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFreetype.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindFribidi.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLEW.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLFW.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLFW3.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindGLM.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindIrrlicht.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindLua51.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindMinizip.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOIS.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOgre.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindOpenGLES.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPCRE.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPVRTools.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindPythonVersion.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindRapidXML.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSDL2.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSDL2_image.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindSILLY.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindTOLUAPP.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindTinyXML.cmake;C:\Test\Dependencies\cegui-0.8.7\cmake\FindXercesC.cmake;C:\Test\Dependencies\cegui-0.8.7\doc\doxygen\doxyfile.in;C:\Test\Dependencies\cegui-0.8.7\samples\common\include\CEGUISamplesConfig.h.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\ZERO_CHECK.vcxproj">
+      <Project>{BAE598CC-CF79-3257-A9CB-72B0A1D0629C}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\cegui\src\CEGUIBase-0.vcxproj">
+      <Project>{55670969-8E49-3350-99B4-BF9E51BACB40}</Project>
+      <Name>CEGUIBase-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\cegui\src\CommonDialogs\CEGUICommonDialogs-0.vcxproj">
+      <Project>{151E53DB-2E5A-38CA-BDFB-1FE91C0F628F}</Project>
+      <Name>CEGUICommonDialogs-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\CommonDialogsDemo\CEGUICommonDialogsDemo.vcxproj">
+      <Project>{035A3A6C-60FC-3174-B8E4-23F1329B7965}</Project>
+      <Name>CEGUICommonDialogsDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\cegui\src\WindowRendererSets\Core\CEGUICoreWindowRendererSet.vcxproj">
+      <Project>{68CDA47B-AC49-3EF1-8FB0-99B331D5766E}</Project>
+      <Name>CEGUICoreWindowRendererSet</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\Demo6\CEGUIDemo6.vcxproj">
+      <Project>{80F44539-756C-3CF8-96DD-9235B0BC5503}</Project>
+      <Name>CEGUIDemo6</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\DragDropDemo\CEGUIDragDropDemo.vcxproj">
+      <Project>{3C41E6EB-1EF9-3E5A-B1D1-09D77AF08568}</Project>
+      <Name>CEGUIDragDropDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\EditboxValidationDemo\CEGUIEditboxValidationDemo.vcxproj">
+      <Project>{216C5E1B-748A-38E1-872A-7080D1A09FEB}</Project>
+      <Name>CEGUIEditboxValidationDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\EffectsDemo\CEGUIEffectsDemo.vcxproj">
+      <Project>{FE9CADE4-70FB-3CCF-B12D-3DCF46BFD9E2}</Project>
+      <Name>CEGUIEffectsDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\cegui\src\XMLParserModules\Expat\CEGUIExpatParser.vcxproj">
+      <Project>{88DE38C2-EB92-3411-8648-8F6930FCD647}</Project>
+      <Name>CEGUIExpatParser</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\FontDemo\CEGUIFontDemo.vcxproj">
+      <Project>{0F14642D-3426-31DB-91F0-45394D7E5563}</Project>
+      <Name>CEGUIFontDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\GameMenu\CEGUIGameMenuDemo.vcxproj">
+      <Project>{D1C4BB19-0736-3AD4-977E-A1A96993F633}</Project>
+      <Name>CEGUIGameMenuDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\HUDDemo\CEGUIHUDDemo.vcxproj">
+      <Project>{EEC96218-E802-3D91-AC34-BC186A54602C}</Project>
+      <Name>CEGUIHUDDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\HelloWorld\CEGUIHelloWorldDemo.vcxproj">
+      <Project>{E8F198CA-5738-3361-A595-49D57E0F0807}</Project>
+      <Name>CEGUIHelloWorldDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\InventoryDemo\CEGUIInventoryDemo.vcxproj">
+      <Project>{CE2D53FA-B87F-3CEB-95AE-034508F6D65A}</Project>
+      <Name>CEGUIInventoryDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\LookNFeelOverview\CEGUILookNFeelOverviewDemo.vcxproj">
+      <Project>{D85B75F6-0F1D-3613-B28E-8ACA75BE55D3}</Project>
+      <Name>CEGUILookNFeelOverviewDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\Minesweeper\CEGUIMinesweeper.vcxproj">
+      <Project>{9E12CC28-7594-34E4-BED5-B69C21707E7E}</Project>
+      <Name>CEGUIMinesweeper</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\cegui\src\RendererModules\OpenGL\CEGUIOpenGLRenderer-0.vcxproj">
+      <Project>{584399EB-5C13-31A6-8DA6-BACBF4A4D8EA}</Project>
+      <Name>CEGUIOpenGLRenderer-0</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\cegui\src\ImageCodecModules\SILLY\CEGUISILLYImageCodec.vcxproj">
+      <Project>{684F743E-C046-3E75-A333-5C56976969F0}</Project>
+      <Name>CEGUISILLYImageCodec</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples_framework\CEGUISampleFramework-0.8.vcxproj">
+      <Project>{7F3002E0-7153-31BE-AEC1-214B866707AD}</Project>
+      <Name>CEGUISampleFramework-0.8</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\ScrollablePaneDemo\CEGUIScrollablePaneDemo.vcxproj">
+      <Project>{27AF67CB-6F13-304C-A8AE-1215DAC3094A}</Project>
+      <Name>CEGUIScrollablePaneDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\TabControlDemo\CEGUITabControlDemo.vcxproj">
+      <Project>{6D926A4F-021C-30FF-8A94-4BA8077B142F}</Project>
+      <Name>CEGUITabControlDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\TextDemo\CEGUITextDemo.vcxproj">
+      <Project>{80F2D3D1-2AB1-32B8-9C7A-7996A228FE57}</Project>
+      <Name>CEGUITextDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\TreeDemo\CEGUITreeDemo.vcxproj">
+      <Project>{13036858-EC94-3305-B30E-AE139D2EC70E}</Project>
+      <Name>CEGUITreeDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Test\Dependencies\cegui-0.8.7\build\samples\WidgetDemo\CEGUIWidgetDemo.vcxproj">
+      <Project>{1A741811-F055-3199-97CC-631DC0EA8DD9}</Project>
+      <Name>CEGUIWidgetDemo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

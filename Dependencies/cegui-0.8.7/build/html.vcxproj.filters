@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\fb35846801cac67b7b5d270f303e6f5b\html.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Test\Dependencies\cegui-0.8.7\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Test\Dependencies\cegui-0.8.7\build\CMakeFiles\html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{0E73CD8C-C5B2-3B21-B79B-DCCA05184FF5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

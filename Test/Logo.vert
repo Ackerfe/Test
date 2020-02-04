@@ -15,7 +15,7 @@ out vec4 Colour;
 void main()
 {
 	gl_Position = Perspective * vec4(vertexPosition, 1.0);
-	UV = vec2(vertexUV.x, vertexUV.y);
+	UV = vec2(vertexUV.x, 1.0 - vertexUV.y);
 	Colour = vertexColour;
 
 }
