@@ -7,23 +7,48 @@ namespace Ackerfe
 		errorCheck(FMOD::System_Create(&mSystem), "System failed to be created");
 		errorCheck(mSystem->init(8, FMOD_INIT_NORMAL, NULL), "FMOD System failed to initialize");
 	}
+
 	void AAudio::errorCheck(FMOD_RESULT result, std::string failLine)
 	{
 		if (result != FMOD_OK)
 			throwError("FMODerror", failLine);
 	}
-	FMOD::Sound * AAudio::loadSound(std::string & soundFilePath)
+
+	void AAudio::loadSound(std::string & soundFilePath, bool streaming /*= false*/)
 	{
+		auto doesSoundExist = mSoundMap.find(soundFilePath);
+		if (doesSoundExist != mSoundMap.end())
+			return;
+
+		FMOD_MODE mode = FMOD_DEFAULT;
+
+		if (streaming)
+			mode |= FMOD_CREATESTREAM;
+
 		FMOD::Sound* newSound;
-		mSystem->createStream(soundFilePath.c_str(), FMOD_DEFAULT, NULL, &newSound);
-		return newSound;
+		mSystem->createSound(soundFilePath.c_str(), mode, NULL, &newSound);
+		mSoundMap[soundFilePath] = newSound;
+		
 	}
-	void AAudio::play(FMOD::Sound * sound)
+	
+	void AAudio::unloadSound(std::string & soundFilePath)
 	{
-		mSystem->playSound(sound, NULL, false, NULL);
+		auto doesSoundExist = mSoundMap.find(soundFilePath);
+		if (doesSoundExist != mSoundMap.end())
+			return;
+
+		errorCheck(doesSoundExist->second->release(), "Failed to release sound" + soundFilePath);
+		mSoundMap.erase(doesSoundExist);
+
 	}
-	void AAudio::loadAndPlaySound(std::string & soundFilePath)
+	
+	void AAudio::play(std::string &soundFilePath)
 	{
-		play(loadSound(soundFilePath));
+		auto doesSoundExist = mSoundMap.find(soundFilePath);
+		if (doesSoundExist != mSoundMap.end())
+			loadSound(soundFilePath);
+		mSystem->playSound(doesSoundExist->second, NULL, false, NULL);
 	}
+	
+	
 }

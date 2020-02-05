@@ -88,7 +88,7 @@ void MainMenu::mainMenuLoop()
 	Ackerfe::AAudio audio;
 	audio.init();
 	std::string soundString = "SoundEffects/Music/IWasTheSun.mp3";
-	
+	audio.loadSound(soundString, true);
 	int audioFlag = 0;
 
 	
@@ -96,7 +96,7 @@ void MainMenu::mainMenuLoop()
 	{
 		if (audioFlag == 0)
 		{
-			audio.loadAndPlaySound(soundString);
+			audio.play(soundString);
 			audioFlag = 1;
 		}
 
