@@ -20,8 +20,10 @@ class MainMenu
 	glm::mat4 mOrthoMatrix;
 	Ackerfe::WindowHandler* mWindow;
 	Ackerfe::InputHandler* mInput = nullptr;
+	
 
 public:
+	
 	void init(Ackerfe::GraphicsResourceManager* GRM, std::string vertShader, std::string fragShader,
 		int screenWidth, int screenHeight, 
 		glm::vec2 cameraPosition, float cameraZoom, 

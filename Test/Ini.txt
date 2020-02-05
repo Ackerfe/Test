@@ -1,12 +1,17 @@
-Initialization File
 Debug
 
-KeyMap
-T
-CoutPressKey
-KeyMapEnd
+CorrespondentManager
+Ini.txt
+Keymap.txt
+CorrespondentManagerEnd
 
-ButtonMap
-LeftClick
-CoutPress
-ButtonMapEnd
+InputHandler
+Keymap.txt
+InputHandlerEnd
+
+PUBLISHER
+InputToGUISender
+
+SUBSCRIBER
+InputToGUIReceiver
+

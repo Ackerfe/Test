@@ -98,4 +98,32 @@ namespace Ackerfe
 		writeInitFile(tempFile);
 	}
 
+	void extractLinesFromFile(std::vector<std::string>* addTo, std::string & startMinusOne, std::string & endPlusOne, std::string & filePath)
+	{
+		unsigned int initSize = addTo->size();
+		std::string tempString;
+		std::fstream fileStream(filePath);
+		if (fileStream.is_open())
+		{
+			while (getline(fileStream, tempString))
+			{
+				if (tempString == startMinusOne)
+				{
+					while (getline(fileStream, tempString))
+					{
+						if (tempString == endPlusOne)
+							break;
+						else
+							addTo->push_back(tempString);
+
+					}
+				}
+			}
+		}
+		else
+			throwError(filePath, filePath + "is missing or corrupt");
+		if (initSize == addTo->size())
+			throwError("ReadFileError", "did not find anything between the lines " + startMinusOne + " and " + endPlusOne + "in file " + filePath);
+	}
+
 }

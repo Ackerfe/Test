@@ -15,11 +15,13 @@
 #include "GUI.h"
 #include "MainMenu.h"
 #include "AAudio.h"
+#include "MessagingSystem.h"
 
 
 /*temporary*/
 #include <iostream>
 #include "Cameras.h"
+
 
 
 void simpleFunction()
@@ -29,7 +31,7 @@ void simpleFunction()
 
 void simpleButtonFunction(glm::vec2 mousecoords)
 {
-	std::cout << "Button Pressed" << std::endl;
+	std::cout << "Button Pressed" << std::endl;	
 }
 
 
@@ -46,37 +48,31 @@ int main(int argc, char** argv)
 
 	Ackerfe::GraphicsResourceManager graphics;
 
+	Ackerfe::CorrespondentManager manager;
+	manager.init();
+
 	GameLogo gameLogo;
 	gameLogo.init("Logo.vert", "Logo.frag", 1920, 1080, glm::vec2 (0.0f,0.0f), 1.0f, &newWindow, &graphics);
 	gameLogo.logoUpdateRenderLoop();
 
 	std::string guiResource = "GUI";
 	Ackerfe::GUI gui;
-	gui.init(guiResource);
+	gui.init(guiResource, &manager);
 
 	Ackerfe::InputHandler newInput;
-	newInput.init(&gui);
-	std::unordered_map<std::string, unsigned int> stringsToSDLKeyCodes;
-	std::unordered_map<std::string, void(*)()> stringsToFunctions;
-	std::unordered_map<std::string, void(*)(glm::vec2)> stringsToButtonFunctions;
-
-	SDL_Event evnt;
-
-	stringsToSDLKeyCodes["T"] = SDLK_t;
-	stringsToFunctions["CoutPressKey"] = simpleFunction;
-	stringsToSDLKeyCodes["LeftClick"] = SDL_BUTTON_LEFT;
-	stringsToButtonFunctions["CoutPress"] = simpleButtonFunction;
-
-	std::string filePath = "ini.txt";
-	newInput.mapKeysFromFile(filePath, stringsToSDLKeyCodes, stringsToFunctions, stringsToButtonFunctions);
+	newInput.init(&manager);
+	
+	Ackerfe::Correspondent wKey;
+	std::string tempString = "wKey";
+	wKey.init(&manager, tempString);
+	Ackerfe::Correspondent kKey;
+	tempString = "kKey";
+	kKey.init(&manager, tempString);
 
 
 	MainMenu mainMenu;
 	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 1920, 1080, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui, &newInput);
 	mainMenu.mainMenuLoop();
-	
-	
-	
 
 	bool doQuit = false;
 
@@ -154,7 +150,7 @@ int main(int argc, char** argv)
 	
 	for (unsigned int i = 0; i < sceneGraphOctStack.size(); i++)
 	{
-		if (camera3D.isBoxInView(sceneGraphOctStack[i]->getPoints()));
+		if (camera3D.isBoxInView(sceneGraphOctStack[i]->getPoints()))
 			sceneGraphOctStack[i]->addToStack(&spatialEntityStack, &sceneGraphOctStack);
 	}
 
@@ -194,70 +190,29 @@ int main(int argc, char** argv)
 		
 
 		multiSprite2.renderBatches();
-		
+	
 		//multiSprite3.renderBatches();
 		//glUseProgram(secondProgramID);
 		glUseProgram(0);
 		
-		//newInput.inputQueue();
+		newInput.inputQueue();
 		
-		/*if (newInput.isKeyDown(SDLK_ESCAPE))
-			doQuit = true;
 
-		if (newInput.isKeyDown(SDLK_w))
+		if (wKey.getMessage())
 		{
-			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, 0.10f, 0.0f));
-			newInput.unpressKey(SDLK_w);
-			perspective = camera3D.getPerspectiveMatrix();
-			modelMatrix = camera3D.getModelMatrix();
-			cameraMatrix = camera3D.getCameraMatrix();
-			modelCameraMatrix = modelMatrix * cameraMatrix;
+			doQuit = true;
 		}
-		if (newInput.isKeyDown(SDLK_d))
-		{
-			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.10f, 0.0f, 0.0f));
-			newInput.unpressKey(SDLK_d);
-			perspective = camera3D.getPerspectiveMatrix();
-			modelMatrix = camera3D.getModelMatrix();
-			cameraMatrix = camera3D.getCameraMatrix();
-			modelCameraMatrix = modelMatrix * cameraMatrix;
-		}
-		if (newInput.isKeyDown(SDLK_a))
-		{
-			camera3D.changePosition(camera3D.getPosition() + glm::vec3(-0.10f, 0.0f, 0.0f));
-			newInput.unpressKey(SDLK_a);
-			perspective = camera3D.getPerspectiveMatrix();
-			modelMatrix = camera3D.getModelMatrix();
-			cameraMatrix = camera3D.getCameraMatrix();
-			modelCameraMatrix = modelMatrix * cameraMatrix;
-		}
-		if (newInput.isKeyDown(SDLK_s))
-		{
-			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, -0.10f, 0.0f));
-			newInput.unpressKey(SDLK_s);
-			perspective = camera3D.getPerspectiveMatrix();
-			modelMatrix = camera3D.getModelMatrix();
-			cameraMatrix = camera3D.getCameraMatrix();
-			modelCameraMatrix = modelMatrix * cameraMatrix;
-		}
-		if (newInput.isKeyDown(SDLK_k))
+		
+		if (kKey.getMessage())
 		{
 			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, 0.0f, -0.10f));
-			newInput.unpressKey(SDLK_k);
 			perspective = camera3D.getPerspectiveMatrix();
 			modelMatrix = camera3D.getModelMatrix();
 			cameraMatrix = camera3D.getCameraMatrix();
 			modelCameraMatrix = modelMatrix * cameraMatrix;
+			kKey.clearMessage();
 		}
-		if (newInput.isKeyDown(SDLK_i))
-		{
-			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, 0.0f, 0.10f));
-			newInput.unpressKey(SDLK_i);
-			perspective = camera3D.getPerspectiveMatrix();
-			modelMatrix = camera3D.getModelMatrix();
-			cameraMatrix = camera3D.getCameraMatrix();
-			modelCameraMatrix = modelMatrix * cameraMatrix;
-		}*/
+		
 		newWindow.swapBuffer();
 		
 			

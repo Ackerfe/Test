@@ -39,6 +39,7 @@ namespace Ackerfe
 
 		errorCheck(doesSoundExist->second->release(), "Failed to release sound" + soundFilePath);
 		mSoundMap.erase(doesSoundExist);
+		std::cout << "exited succesfully";
 
 	}
 	

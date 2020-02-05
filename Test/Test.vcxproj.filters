@@ -47,7 +47,13 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="Ini.txt">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Keymap.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="CorrespondentMasterList.txt">
+      <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

@@ -116,6 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,6 +140,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -184,11 +186,11 @@
     <ClInclude Include="GraphicsResourceManager.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="ImageLoad.h" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="IAppState.h" />
     <ClInclude Include="InitFileReadWrite.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Logostate.h" />
+    <ClInclude Include="MessagingSystem.h" />
     <ClInclude Include="MultiSprite.h" />
     <ClInclude Include="PicoPNG.h" />
     <ClInclude Include="SimpleShader.h" />
@@ -197,7 +199,6 @@
     <ClInclude Include="Spritefont.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Triangle.h" />
-    <ClInclude Include="Vertex.h" />
     <ClInclude Include="WindowHandler.h" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +213,7 @@
     <ClCompile Include="InitFileReadWrite.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Logostate.cpp" />
+    <ClCompile Include="MessagingSystem.cpp" />
     <ClCompile Include="MultiSprite.cpp" />
     <ClCompile Include="PicoPNG.cpp" />
     <ClCompile Include="SimpleShader.cpp" />

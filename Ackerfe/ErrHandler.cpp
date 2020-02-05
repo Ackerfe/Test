@@ -40,7 +40,7 @@ namespace Ackerfe
 	void throwError(std::string errorWord, std::string errorString)
 	{
 		std::string debugString = "Debug";
-		if (debugString == readInitFileLine(2))
+		if (debugString == readInitFileLine(1))
 			throwConsoleError(errorString);
 		else
 			throwFileError(errorWord, errorString);

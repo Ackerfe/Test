@@ -15,5 +15,7 @@ namespace Ackerfe
 	/*Sostituisce la riga lineNumber del file ini con la stringa replacementString*/
 	void writeInitFileLine(unsigned int lineNumber, std::string replacementString);
 
+	void extractLinesFromFile(std::vector<std::string>* addTo, std::string &startMinusOne, std::string &endPlusOne, std::string &filePath);
+
 }
 

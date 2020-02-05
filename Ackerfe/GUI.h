@@ -3,6 +3,7 @@
 #include <SDL/SDL_events.h>
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/OpenGL/GL3Renderer.h>
+#include "MessagingSystem.h"
 
 namespace Ackerfe {
 	class GUI
@@ -12,9 +13,10 @@ namespace Ackerfe {
 		CEGUI::Window* mRoot = nullptr;
 		unsigned int mPreviousTime = 0;
 		int mGet_fX, mGetfY;
+		Correspondent mFromInput;
 
 	public:
-		void init(std::string& resourceDirectory);
+		void init(std::string& resourceDirectory, CorrespondentManager* corrManager);
 		void destroy();
 		void update();
 		void render();

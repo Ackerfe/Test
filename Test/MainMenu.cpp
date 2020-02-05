@@ -85,10 +85,6 @@ void MainMenu::mainMenuLoop()
 
 	mGRM->mMultisprite2D.prepareBatches();
 
-	Ackerfe::AAudio audio;
-	audio.init();
-	std::string soundString = "SoundEffects/Music/IWasTheSun.mp3";
-	audio.loadSound(soundString, true);
 	int audioFlag = 0;
 
 	
@@ -96,7 +92,7 @@ void MainMenu::mainMenuLoop()
 	{
 		if (audioFlag == 0)
 		{
-			audio.play(soundString);
+			
 			audioFlag = 1;
 		}
 
@@ -104,6 +100,7 @@ void MainMenu::mainMenuLoop()
 		render();
 		mGUI->update();
 	}
+	
 	
 	glEnable(GL_DEPTH_TEST);
 }

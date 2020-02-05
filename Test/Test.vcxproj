@@ -155,7 +155,9 @@
     <None Include="TextureFrag.frag" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="CorrespondentMasterList.txt" />
     <Text Include="Ini.txt" />
+    <Text Include="Keymap.txt" />
     <Text Include="TextureVert.vert" />
   </ItemGroup>
   <ItemGroup>

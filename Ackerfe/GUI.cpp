@@ -123,9 +123,12 @@ namespace Ackerfe
 		}
 	}
 
-	void GUI::init(std::string & resourceDirectory)
+	void GUI::init(std::string & resourceDirectory, CorrespondentManager* corrManager)
 	{
+		std::string inputSignature = "InputToGUIReceiver";
+		mFromInput.init(corrManager, inputSignature);
 		mGUIRenderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
+		
 		CEGUI::WindowManager& winMgr = CEGUI::WindowManager::getSingleton();
 		CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
 		mPreviousTime = SDL_GetTicks();
@@ -161,6 +164,32 @@ namespace Ackerfe
 		unsigned int currentTime = SDL_GetTicks();
 		unsigned int timeElapsed = currentTime - mPreviousTime;
 		mContext->injectTimePulse((float)timeElapsed / 1000.0f);
+
+		if (mFromInput.getMessage())
+		{
+			SDL_Event evnt = mFromInput.getEventMessage();
+			switch (evnt.type)
+			{
+			case SDL_KEYDOWN:
+				keyDownFunc(evnt);
+				break;
+			case SDL_KEYUP:
+				keyUpFunc(evnt);
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				mouseButtonDownFunc(evnt);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				mouseButtonUpFunc(evnt);
+				break;
+			case SDL_TEXTINPUT:
+				decodeInputText(evnt);
+				break;
+			case SDL_MOUSEMOTION:
+				mouseMotionFunc(evnt);
+				break;
+			}
+		}
 	}
 
 	void GUI::render()
