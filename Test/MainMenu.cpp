@@ -7,7 +7,7 @@ void MainMenu::init(Ackerfe::GraphicsResourceManager * GRM,
 	std::string vertShader, std::string fragShader,
 	int screenWidth, int screenHeight,
 	glm::vec2 cameraPosition, float cameraZoom,
-	Ackerfe::WindowHandler* window, Ackerfe::GUI* gui)
+	Ackerfe::WindowHandler* window, Ackerfe::GUI* gui, Ackerfe::InputHandler* input)
 {
 	mGRM = GRM;
 	mProgramID = Ackerfe::compileLinkSimpleShaders(vertShader, fragShader);
@@ -18,6 +18,7 @@ void MainMenu::init(Ackerfe::GraphicsResourceManager * GRM,
 	mScreenHeight = screenHeight;
 	mWindow = window;
 	mGUI = gui;
+	mInput = input;
 	
 }
 
@@ -29,9 +30,9 @@ void MainMenu::mainMenuLoop()
 	mGUI->loadScheme("TaharezLook.scheme");
 	mGUI->setFont("DejaVuSans-10");
 
-	mGUI->setMouseCursor("TaharezLook/MouseArrow");
-	mGUI->showMouseCursor();
-	SDL_ShowCursor(false);
+	//mGUI->setMouseCursor("TaharezLook/MouseArrow");
+	//mGUI->showMouseCursor();
+	
 	
 	CEGUI::PushButton* startButton = (CEGUI::PushButton*)mGUI->createWidget("TaharezLook/Button", glm::vec4(0.45f, 0.4f, 0.1f, 0.05f), glm::vec4(0.0f), "StartButton");
 	startButton->setText("Start");
@@ -41,6 +42,9 @@ void MainMenu::mainMenuLoop()
 	CEGUI::PushButton* exitButton = (CEGUI::PushButton*)mGUI->createWidget("TaharezLook/Button", glm::vec4(0.45f, 0.5f, 0.1f, 0.05f), glm::vec4(0.0f), "ExitButton");
 	exitButton->setText("Exit");
 	exitButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&MainMenu::exitGame, this));
+
+	CEGUI::PushButton* testButton = (CEGUI::PushButton*)mGUI->createWidget("TaharezLook/Button", glm::vec4(0.45f, 0.6f, 0.1f, 0.05f), glm::vec4(0.0f), "TestButton");
+	testButton->setText("Test");
 
 	CEGUI::Combobox* textBox = static_cast<CEGUI::Combobox*>(mGUI->createWidget("TaharezLook/Combobox", glm::vec4(0.45f, 0.7f, 0.1f, 0.05f), glm::vec4(0.0f), "Typebox"));
 
@@ -71,7 +75,7 @@ void MainMenu::mainMenuLoop()
 		Ackerfe::Vertex(2.0f*twoFifthsScreenWidth, fifthScreenHeight, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
 		Ackerfe::Vertex(2.0f*twoFifthsScreenWidth, twoFifthsScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
 
-	Ackerfe::SpriteFont spriteFont("Fonts/ThreSixt_2.ttf", 25);
+	Ackerfe::SpriteFont spriteFont("Fonts/ThreSixt_2.ttf", 64);
 
 	char buffer[256];
 	sprintf_s(buffer, "Asteroids!");
@@ -81,20 +85,26 @@ void MainMenu::mainMenuLoop()
 
 	mGRM->mMultisprite2D.prepareBatches();
 
+	Ackerfe::AAudio audio;
+	audio.init();
+	std::string soundString = "SoundEffects/Music/IWasTheSun.mp3";
+	
+	int audioFlag = 0;
+
+	
 	while (!mStartGame)
 	{
-		render();
-
-		SDL_Event evnt;
-
-		while (SDL_PollEvent(&evnt))
+		if (audioFlag == 0)
 		{
-			mGUI->inputGUI(evnt);
+			audio.loadAndPlaySound(soundString);
+			audioFlag = 1;
 		}
-		mGUI->update();
-		
-	}
 
+		mInput->inputQueue();
+		render();
+		mGUI->update();
+	}
+	
 	glEnable(GL_DEPTH_TEST);
 }
 

@@ -155,6 +155,7 @@
     <None Include="TextureFrag.frag" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Ini.txt" />
     <Text Include="TextureVert.vert" />
   </ItemGroup>
   <ItemGroup>

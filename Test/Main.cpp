@@ -14,11 +14,24 @@
 #include "GraphicsResourceManager.h"
 #include "GUI.h"
 #include "MainMenu.h"
+#include "AAudio.h"
 
 
 /*temporary*/
 #include <iostream>
 #include "Cameras.h"
+
+
+void simpleFunction()
+{
+	std::cout << "Key Pressed" << std::endl;
+}
+
+void simpleButtonFunction(glm::vec2 mousecoords)
+{
+	std::cout << "Button Pressed" << std::endl;
+}
+
 
 int main(int argc, char** argv)
 {
@@ -29,24 +42,41 @@ int main(int argc, char** argv)
 	float green = 0.0f;
 	float blue = 0.0f;
 	Ackerfe::WindowHandler newWindow;
-	newWindow.createWindow("Window", 512, 512, 0);
+	newWindow.createWindow("Window", 1920, 1080, 0);
 
 	Ackerfe::GraphicsResourceManager graphics;
 
 	GameLogo gameLogo;
-	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2 (0.0f,0.0f), 1.0f, &newWindow, &graphics);
+	gameLogo.init("Logo.vert", "Logo.frag", 1920, 1080, glm::vec2 (0.0f,0.0f), 1.0f, &newWindow, &graphics);
 	gameLogo.logoUpdateRenderLoop();
 
 	std::string guiResource = "GUI";
 	Ackerfe::GUI gui;
 	gui.init(guiResource);
 
-	MainMenu mainMenu;
-	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui);
-	mainMenu.mainMenuLoop();
-
 	Ackerfe::InputHandler newInput;
+	newInput.init(&gui);
+	std::unordered_map<std::string, unsigned int> stringsToSDLKeyCodes;
+	std::unordered_map<std::string, void(*)()> stringsToFunctions;
+	std::unordered_map<std::string, void(*)(glm::vec2)> stringsToButtonFunctions;
 
+	SDL_Event evnt;
+
+	stringsToSDLKeyCodes["T"] = SDLK_t;
+	stringsToFunctions["CoutPressKey"] = simpleFunction;
+	stringsToSDLKeyCodes["LeftClick"] = SDL_BUTTON_LEFT;
+	stringsToButtonFunctions["CoutPress"] = simpleButtonFunction;
+
+	std::string filePath = "ini.txt";
+	newInput.mapKeysFromFile(filePath, stringsToSDLKeyCodes, stringsToFunctions, stringsToButtonFunctions);
+
+
+	MainMenu mainMenu;
+	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 1920, 1080, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui, &newInput);
+	mainMenu.mainMenuLoop();
+	
+	
+	
 
 	bool doQuit = false;
 
@@ -169,9 +199,9 @@ int main(int argc, char** argv)
 		//glUseProgram(secondProgramID);
 		glUseProgram(0);
 		
-		newInput.inputQueue();
+		//newInput.inputQueue();
 		
-		if (newInput.isKeyDown(SDLK_ESCAPE))
+		/*if (newInput.isKeyDown(SDLK_ESCAPE))
 			doQuit = true;
 
 		if (newInput.isKeyDown(SDLK_w))
@@ -227,7 +257,7 @@ int main(int argc, char** argv)
 			modelMatrix = camera3D.getModelMatrix();
 			cameraMatrix = camera3D.getCameraMatrix();
 			modelCameraMatrix = modelMatrix * cameraMatrix;
-		}
+		}*/
 		newWindow.swapBuffer();
 		
 			

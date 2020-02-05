@@ -6,6 +6,8 @@ namespace Ackerfe
 {
 	/*Legge il file ini e fa sì che possa essere usato dal programma*/
 	std::vector<std::string> readInitFile();
+
+	std::vector<std::string> readFile(std::string &filePath);
 	/*Seleziona una sola riga dal file ini e la rende usabile dal programma*/
 	std::string readInitFileLine(unsigned int lineNumber);
 	/*Scrive o sostituisce il file ini con il vettore di righe initContents*/

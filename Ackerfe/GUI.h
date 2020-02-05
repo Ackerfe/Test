@@ -11,6 +11,7 @@ namespace Ackerfe {
 		CEGUI::GUIContext* mContext = nullptr;
 		CEGUI::Window* mRoot = nullptr;
 		unsigned int mPreviousTime = 0;
+		int mGet_fX, mGetfY;
 
 	public:
 		void init(std::string& resourceDirectory);
@@ -22,8 +23,13 @@ namespace Ackerfe {
 		void showMouseCursor();
 		void hideMouseCursor();
 
+		void keyUpFunc(SDL_Event &keyEvent);
+		void keyDownFunc(SDL_Event &keyEvent);
+		void mouseMotionFunc(SDL_Event &motionEvent);
 		void decodeInputText(SDL_Event &textEvent);
-		void inputGUI(SDL_Event &event);
+		void mouseButtonDownFunc(SDL_Event &buttonEvent);
+		void mouseButtonUpFunc(SDL_Event &buttonEvent);
+		
 		
 		static CEGUI::OpenGL3Renderer* getRenderer() { return mGUIRenderer; }
 

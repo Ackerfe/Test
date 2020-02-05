@@ -46,6 +46,9 @@
     <Text Include="TextureVert.vert">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Ini.txt">
+      <Filter>Source Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogo.h">

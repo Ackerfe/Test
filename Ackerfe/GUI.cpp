@@ -5,81 +5,11 @@
 #include <iostream>
 namespace Ackerfe
 {
+
+
+
+
 	CEGUI::OpenGL3Renderer* GUI::mGUIRenderer = nullptr;
-
-	void GUI::init(std::string & resourceDirectory)
-	{
-		mGUIRenderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
-		CEGUI::WindowManager& winMgr = CEGUI::WindowManager::getSingleton();
-		CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
-		mPreviousTime = SDL_GetTicks();
-
-		resourceProvider->setResourceGroupDirectory("imagesets", resourceDirectory + "/imagesets/");
-		resourceProvider->setResourceGroupDirectory("schemes", resourceDirectory + "/schemes/");
-		resourceProvider->setResourceGroupDirectory("fonts", resourceDirectory + "/fonts/");
-		resourceProvider->setResourceGroupDirectory("layouts", resourceDirectory + "/layouts/");
-		resourceProvider->setResourceGroupDirectory("looknfeel", resourceDirectory + "/looknfeel/");
-		resourceProvider->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
-	
-		CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
-		CEGUI::Scheme::setDefaultResourceGroup("schemes");
-		CEGUI::Font::setDefaultResourceGroup("fonts");
-		CEGUI::WindowManager::setDefaultResourceGroup("layouts");
-		CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeel");
-		CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
-
-		mContext = &CEGUI::System::getSingleton().createGUIContext(mGUIRenderer->getDefaultRenderTarget());
-
-		mRoot = (CEGUI::DefaultWindow*)winMgr.createWindow("DefaultWindow", "Root");
-		mContext->setRootWindow(mRoot);
-
-	}
-
-	void GUI::destroy()
-	{
-		CEGUI::System::getSingleton().destroyGUIContext(*mContext);
-	}
-
-	void GUI::update()
-	{
-		unsigned int currentTime = SDL_GetTicks();
-		unsigned int timeElapsed = currentTime - mPreviousTime;
-		mContext->injectTimePulse((float)timeElapsed / 1000.0f);
-	}
-
-	void GUI::render()
-	{
-		glDisable(GL_DEPTH_TEST);
-
-		mGUIRenderer->beginRendering();
-		mContext->draw();
-		mGUIRenderer->endRendering();
-		
-		glBindVertexArray(0);
-		glDisable(GL_SCISSOR_TEST);
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	}
-
-	void GUI::setMouseCursor(const std::string & imageFile)
-	{
-		mContext->getMouseCursor().setDefaultImage(imageFile);
-	}
-
-	void GUI::showMouseCursor()
-	{
-		mContext->getMouseCursor().show();
-	}
-
-	void GUI::hideMouseCursor()
-	{
-		mContext->getMouseCursor().hide();
-
-	}
 
 	CEGUI::Key::Scan SDLKeyToCEGUIKey(SDL_Keycode key)
 	{
@@ -193,6 +123,98 @@ namespace Ackerfe
 		}
 	}
 
+	void GUI::init(std::string & resourceDirectory)
+	{
+		mGUIRenderer = &CEGUI::OpenGL3Renderer::bootstrapSystem();
+		CEGUI::WindowManager& winMgr = CEGUI::WindowManager::getSingleton();
+		CEGUI::DefaultResourceProvider* resourceProvider = static_cast<CEGUI::DefaultResourceProvider*>(CEGUI::System::getSingleton().getResourceProvider());
+		mPreviousTime = SDL_GetTicks();
+
+		resourceProvider->setResourceGroupDirectory("imagesets", resourceDirectory + "/imagesets/");
+		resourceProvider->setResourceGroupDirectory("schemes", resourceDirectory + "/schemes/");
+		resourceProvider->setResourceGroupDirectory("fonts", resourceDirectory + "/fonts/");
+		resourceProvider->setResourceGroupDirectory("layouts", resourceDirectory + "/layouts/");
+		resourceProvider->setResourceGroupDirectory("looknfeel", resourceDirectory + "/looknfeel/");
+		resourceProvider->setResourceGroupDirectory("lua_scripts", resourceDirectory + "/lua_scripts/");
+	
+		CEGUI::ImageManager::setImagesetDefaultResourceGroup("imagesets");
+		CEGUI::Scheme::setDefaultResourceGroup("schemes");
+		CEGUI::Font::setDefaultResourceGroup("fonts");
+		CEGUI::WindowManager::setDefaultResourceGroup("layouts");
+		CEGUI::WidgetLookManager::setDefaultResourceGroup("looknfeel");
+		CEGUI::ScriptModule::setDefaultResourceGroup("lua_scripts");
+
+		mContext = &CEGUI::System::getSingleton().createGUIContext(mGUIRenderer->getDefaultRenderTarget());
+
+		mRoot = (CEGUI::DefaultWindow*)winMgr.createWindow("DefaultWindow", "Root");
+		mContext->setRootWindow(mRoot);
+
+	}
+
+	void GUI::destroy()
+	{
+		CEGUI::System::getSingleton().destroyGUIContext(*mContext);
+	}
+
+	void GUI::update()
+	{
+		unsigned int currentTime = SDL_GetTicks();
+		unsigned int timeElapsed = currentTime - mPreviousTime;
+		mContext->injectTimePulse((float)timeElapsed / 1000.0f);
+	}
+
+	void GUI::render()
+	{
+		glDisable(GL_DEPTH_TEST);
+
+		mGUIRenderer->beginRendering();
+		mContext->draw();
+		mGUIRenderer->endRendering();
+		
+		glBindVertexArray(0);
+		glDisable(GL_SCISSOR_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
+
+	void GUI::setMouseCursor(const std::string & imageFile)
+	{
+		mContext->getMouseCursor().setDefaultImage(imageFile);
+	}
+
+	void GUI::showMouseCursor()
+	{
+		mContext->getMouseCursor().show();
+	}
+
+	void GUI::hideMouseCursor()
+	{
+		mContext->getMouseCursor().hide();
+
+	}
+
+	void GUI::keyUpFunc(SDL_Event & keyEvent)
+	{
+		mContext->injectKeyUp(SDLKeyToCEGUIKey(keyEvent.key.keysym.sym));
+	}
+
+	void GUI::keyDownFunc(SDL_Event & keyEvent)
+	{
+		mContext->injectKeyDown(SDLKeyToCEGUIKey(keyEvent.key.keysym.sym));
+	}
+
+	void GUI::mouseMotionFunc(SDL_Event & motionEvent)
+	{
+		SDL_GetMouseState(&mGet_fX, &mGetfY);
+		mContext->injectMousePosition(mGet_fX, mGetfY);
+	}
+
+
+
 	CEGUI::MouseButton SDLMouseButtonToCEGUIMouseButton(Uint8 sdlButton)
 	{
 		switch (sdlButton)
@@ -216,31 +238,14 @@ namespace Ackerfe
 		mContext->injectChar(codePoint);
 	}
 
-	void GUI::inputGUI(SDL_Event & event)
+	void GUI::mouseButtonDownFunc(SDL_Event & buttonEvent)
 	{
-		switch (event.type)
-		{
-		case SDL_MOUSEMOTION:
-			mContext->injectMousePosition(event.motion.x, event.motion.y);
-			break;
-		case SDL_KEYDOWN:
-			mContext->injectKeyDown(SDLKeyToCEGUIKey(event.key.keysym.sym));
-			break;
-		case SDL_KEYUP:
-			mContext->injectKeyUp(SDLKeyToCEGUIKey(event.key.keysym.sym));
-			break;
-		case SDL_TEXTINPUT:
-			decodeInputText(event);
-			break;
-		case SDL_MOUSEBUTTONDOWN:
-			mContext->injectMouseButtonDown(SDLMouseButtonToCEGUIMouseButton(event.button.button));
-			break;
-		case SDL_MOUSEBUTTONUP:
-			mContext->injectMouseButtonUp(SDLMouseButtonToCEGUIMouseButton(event.button.button));
-			break;
-		
+		mContext->injectMouseButtonDown(SDLMouseButtonToCEGUIMouseButton(buttonEvent.button.button));
+	}
 
-		}
+	void GUI::mouseButtonUpFunc(SDL_Event & buttonEvent)
+	{
+		mContext->injectMouseButtonUp(SDLMouseButtonToCEGUIMouseButton(buttonEvent.button.button));
 	}
 
 	void GUI::loadScheme(const std::string & schemeFile)

@@ -7,18 +7,44 @@ namespace Ackerfe
 	std::vector<std::string> Ackerfe::readInitFile()
 	{
 		std::vector<std::string> returnVector;
+		std::string tempString;
 		std::ifstream initFile("Ini.txt");
 		if (initFile.is_open())
 		{
 			int initFileLine = 0;
-			while (getline(initFile, returnVector[initFileLine]))
+			while (getline(initFile, tempString))
+			{
+				returnVector.push_back(tempString);
 				initFileLine++;
+			}
 
 		}
 		else
 			Ackerfe::throwFileError("Inizializzazione", "Il file di inizializzazione manca o è corrotto");
 
 		return returnVector;
+	}
+
+	std::vector<std::string> readFile(std::string & filePath)
+	{
+		std::vector<std::string> returnVector;
+		std::string tempString;
+		std::ifstream initFile(filePath);
+		if (initFile.is_open())
+		{
+			int initFileLine = 0;
+			while (getline(initFile, tempString))
+			{
+				returnVector.push_back(tempString);
+				initFileLine++;
+			}
+
+		}
+		else
+			Ackerfe::throwFileError("Inizializzazione", "Il file di inizializzazione manca o è corrotto");
+
+		return returnVector;
+		return std::vector<std::string>();
 	}
 
 	std::string Ackerfe::readInitFileLine(unsigned int lineNumber)
