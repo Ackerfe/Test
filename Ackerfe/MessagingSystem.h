@@ -29,7 +29,36 @@ namespace Ackerfe
 		SDL_Event evnt;
 	};
 
-	class CorrespondentManager;
+	class Correspondent;
+
+	class CorrespondentManager
+	{
+		std::map<std::string, Correspondent*> mActiveCorrespondents;
+		std::multimap<std::string, std::string> mConnectionRequest;
+		std::vector<std::string> mAllPossibleCorrespondentSignatures;
+		
+	public:
+
+		CorrespondentManager();
+		~CorrespondentManager();
+
+		void firstInit();
+		void init();
+		void findAllConnections(std::string &filePath);
+
+		void checkConnectionRequest();
+
+		void createSubscription(std::string &subscriber, std::string &publisher);
+		void cancelSubscription(std::string &subscriber, std::string &publisher);
+
+		void listNewCorrespondent(std::string &correspondentSignature, Correspondent* correspondent);
+		void delistCorrespondent(std::string &correspondentSignature);
+
+		void createCorrespondentSignature(std::string &signature);
+		void removeCorrespondentSignature(std::string &signature);
+		bool isCorrespondentSignature(std::string &signature);
+
+	};
 
 	class Correspondent
 	{
@@ -64,34 +93,6 @@ namespace Ackerfe
 
 		void clearMessage();
 
-
-	};
-
-	class CorrespondentManager
-	{
-		std::map<std::string, Correspondent*> mActiveCorrespondents;
-		std::multimap<std::string, std::string> mConnectionRequest;
-		std::vector<std::string> mAllPossibleCorrespondentSignatures;
-		
-	public:
-
-		CorrespondentManager();
-		~CorrespondentManager();
-
-		void init();
-		void findAllConnections(std::string &filePath);
-
-		void checkConnectionRequest();
-
-		void createSubscription(std::string &subscriber, std::string &publisher);
-		void cancelSubscription(std::string &subscriber, std::string &publisher);
-
-		void listNewCorrespondent(std::string &correspondentSignature, Correspondent* correspondent);
-		void delistCorrespondent(std::string &correspondentSignature);
-
-		void createCorrespondentSignature(std::string &signature);
-		void removeCorrespondentSignature(std::string &signature);
-		bool isCorrespondentSignature(std::string &signature);
 
 	};
 

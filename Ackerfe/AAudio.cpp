@@ -2,54 +2,84 @@
 
 namespace Ackerfe
 {
-	void AAudio::init()
-	{
-		errorCheck(FMOD::System_Create(&mSystem), "System failed to be created");
-		errorCheck(mSystem->init(8, FMOD_INIT_NORMAL, NULL), "FMOD System failed to initialize");
-	}
-
-	void AAudio::errorCheck(FMOD_RESULT result, std::string failLine)
+	void errorCheck(FMOD_RESULT result, std::string failLine)
 	{
 		if (result != FMOD_OK)
 			throwError("FMODerror", failLine);
 	}
 
-	void AAudio::loadSound(std::string & soundFilePath, bool streaming /*= false*/)
+	void AAudio::init(std::string &initialSoundMapFilePath, CorrespondentManager* corrManager)
 	{
-		auto doesSoundExist = mSoundMap.find(soundFilePath);
-		if (doesSoundExist != mSoundMap.end())
-			return;
+		errorCheck(FMOD::System_Create(&mSystem), "System failed to be created");
+		errorCheck(mSystem->init(8, FMOD_INIT_NORMAL, NULL), "FMOD System failed to initialize");
+		mManager = corrManager;
+		loadSoundMap(initialSoundMapFilePath);
+	}
 
-		FMOD_MODE mode = FMOD_DEFAULT;
+	
+	void AAudio::loadSoundMap(std::string & initialSoundMapFilePath)
+	{
+		if (!mSoundMap.empty())
+			mSoundMap.clear();
 
-		if (streaming)
-			mode |= FMOD_CREATESTREAM;
+		std::string tempString;
+		std::ifstream fileStream(initialSoundMapFilePath);
+		if (fileStream.is_open())
+		{
+			while (getline(fileStream, tempString))
+			{
+				if (tempString == "Sound")
+				{
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					ASound newSound;
+					mSoundMap.push_back(newSound);
+					mSoundMap.back().init(mManager, tempString, mSystem);
+				}
+			}
+		}
+		else
+			throwError("SoundMapFile", "SoundMapFile " + initialSoundMapFilePath + " could not be opened");
+	}
 
-		FMOD::Sound* newSound;
-		mSystem->createSound(soundFilePath.c_str(), mode, NULL, &newSound);
-		mSoundMap[soundFilePath] = newSound;
-		
+	void AAudio::update()
+	{
+		for (unsigned int i = 0; i < mSoundMap.size(); i++)
+		{
+			mSoundMap[i].update();
+		}
 	}
 	
-	void AAudio::unloadSound(std::string & soundFilePath)
-	{
-		auto doesSoundExist = mSoundMap.find(soundFilePath);
-		if (doesSoundExist != mSoundMap.end())
-			return;
 
-		errorCheck(doesSoundExist->second->release(), "Failed to release sound" + soundFilePath);
-		mSoundMap.erase(doesSoundExist);
-		std::cout << "exited succesfully";
-
-	}
 	
-	void AAudio::play(std::string &soundFilePath)
+	
+	ASound::ASound()
 	{
-		auto doesSoundExist = mSoundMap.find(soundFilePath);
-		if (doesSoundExist != mSoundMap.end())
-			loadSound(soundFilePath);
-		mSystem->playSound(doesSoundExist->second, NULL, false, NULL);
 	}
-	
-	
+
+
+	void ASound::init(CorrespondentManager * corrManager, std::string & soundFile, FMOD::System * system)
+	{ 
+		soundReceiver.init(corrManager, soundFile);
+		mSystem = system;
+		errorCheck(mSystem->createSound(soundFile.c_str(), FMOD_DEFAULT, NULL, &mSound), "Sound" + soundFile + " could not be initialized");
+	}
+
+	void ASound::update()
+	{
+		if (soundReceiver.getMessage())
+		{
+			errorCheck(mSystem->playSound(mSound, NULL, false, NULL), "Sound could not be played");
+			soundReceiver.clearMessage();
+		}
+	}
+
+	void ASound::destroy()
+	{
+		errorCheck(mSound->release(), "Sound could not be released");
+	}
+
 }

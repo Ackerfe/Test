@@ -17,6 +17,8 @@ namespace Ackerfe
 		mManager = corrManager;
 		std::string tempString = "InputToGUISender";
 		mToGUI.init(mManager, tempString);
+		tempString = "CameraLookAtSender";
+		mMouseSender.init(corrManager, tempString);
 
 		tempString = "Ini.txt";
 		std::string tempStart = "InputHandler";
@@ -56,11 +58,13 @@ namespace Ackerfe
 					getline(fileStream, tempString);
 					getline(fileStream, tempString);
 					currentKey = tempString;
+					std::cout << currentKey;
 				}
 				if (tempString == "KEYCODE")
 				{
 					getline(fileStream, tempString);
 					mapKey(std::stoi(tempString, nullptr, 10), currentKey);
+					std::cout << tempString;
 				}
 			}
 		}
@@ -98,7 +102,10 @@ namespace Ackerfe
 			case SDL_MOUSEBUTTONDOWN:
 				pressButton(evnt.button.button, glm::vec2(evnt.button.x, evnt.button.y));
 				break;
-		
+
+			case SDL_MOUSEMOTION:
+				mMouseSender.publish(glm::vec2((float)evnt.motion.xrel, (float)evnt.motion.yrel));
+				break;
 			}
 		}
 	}

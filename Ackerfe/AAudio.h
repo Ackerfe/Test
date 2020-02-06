@@ -3,19 +3,36 @@
 #include "ErrHandler.h"
 #include <string>
 #include <map>
+#include "MessagingSystem.h"
 
 namespace Ackerfe
 {
+	class ASound
+	{
+		Correspondent soundReceiver;
+		FMOD::Sound* mSound = nullptr;
+		FMOD::System* mSystem = nullptr;
+
+	public:
+		ASound();
+
+		void init(CorrespondentManager* corrManager, std::string &soundFile, FMOD::System* system);
+		void update();
+		void destroy();
+
+
+	};
+
+	
 	class AAudio
 	{
 		FMOD::System* mSystem = nullptr;
-		std::map<std::string, FMOD::Sound*>mSoundMap;
+		CorrespondentManager* mManager;
+		std::vector<ASound> mSoundMap;
 
 	public:
-		void init();
-		void errorCheck(FMOD_RESULT result, std::string failLine);
-		void loadSound(std::string &soundFilePath, bool streaming = false);
-		void play(std::string &soundFilePath);
-		void unloadSound(std::string &soundFilePath);
+		void init(std::string &initialSoundMapFilePath, CorrespondentManager* corrManager);
+		void loadSoundMap(std::string &soundMapFilePath);
+		void update();
 	};
 }

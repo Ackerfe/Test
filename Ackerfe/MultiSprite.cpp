@@ -112,7 +112,6 @@ namespace Ackerfe {
 
 	void MultiSprite::renderBatches()
 	{
-		
 		glBindVertexArray(mVao);
 
 		//GLuint queryID;

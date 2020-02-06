@@ -44,15 +44,16 @@ int main(int argc, char** argv)
 	float green = 0.0f;
 	float blue = 0.0f;
 	Ackerfe::WindowHandler newWindow;
-	newWindow.createWindow("Window", 1920, 1080, 0);
+	newWindow.createWindow("Window", 512, 512, 0);
 
 	Ackerfe::GraphicsResourceManager graphics;
 
 	Ackerfe::CorrespondentManager manager;
-	manager.init();
+	manager.firstInit();
+	
 
 	GameLogo gameLogo;
-	gameLogo.init("Logo.vert", "Logo.frag", 1920, 1080, glm::vec2 (0.0f,0.0f), 1.0f, &newWindow, &graphics);
+	gameLogo.init("Logo.vert", "Logo.frag", 512, 512, glm::vec2 (0.0f,0.0f), 1.0f, &newWindow, &graphics);
 	gameLogo.logoUpdateRenderLoop();
 
 	std::string guiResource = "GUI";
@@ -61,18 +62,38 @@ int main(int argc, char** argv)
 
 	Ackerfe::InputHandler newInput;
 	newInput.init(&manager);
-	
-	Ackerfe::Correspondent wKey;
+
+	/*Ackerfe::Correspondent wKey;
 	std::string tempString = "wKey";
 	wKey.init(&manager, tempString);
-	Ackerfe::Correspondent kKey;
-	tempString = "kKey";
-	kKey.init(&manager, tempString);
-
+	Ackerfe::Correspondent sKey;
+	tempString = "sKey";
+	sKey.init(&manager, tempString);
+	Ackerfe::Correspondent aKey;
+	tempString = "aKey";
+	aKey.init(&manager, tempString);
+	Ackerfe::Correspondent dKey;
+	tempString = "dKey";
+	dKey.init(&manager, tempString);
+	Ackerfe::Correspondent leftShiftKey;
+	tempString = "leftShiftKey";
+	leftShiftKey.init(&manager, tempString);
+	Ackerfe::Correspondent spacebarKey;
+	tempString = "spacebarKey";
+	spacebarKey.init(&manager, tempString);
+	Ackerfe::Correspondent leftMouse;
+	tempString = "leftMouse";
+	leftMouse.init(&manager, tempString);*/
+	manager.init();
 
 	MainMenu mainMenu;
-	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 1920, 1080, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui, &newInput);
+	mainMenu.init(&graphics, "Logo.vert", "Logo.frag", 512, 512, glm::vec2(0.0f, 0.0f), 1.0f, &newWindow, &gui, &newInput);
 	mainMenu.mainMenuLoop();
+
+	Ackerfe::AAudio audio;
+	std::string tempString = "SoundMap1.txt";
+	audio.init(tempString, &manager);
+	audio.update();
 
 	bool doQuit = false;
 
@@ -94,14 +115,11 @@ int main(int argc, char** argv)
 	//Ackerfe::MultiSprite multiSprite3;
 	//multiSprite3.init();
 	
-	Ackerfe::Camera2D camera2D(1000, 1000, glm::vec2(0.0f,0.0f), 1.0f);
+	Ackerfe::Camera2D camera2D(512, 512, glm::vec2(0.0f,0.0f), 1.0f);
 	
 
-	Ackerfe::Camera3D camera3D(512, 512, glm::vec3(10.0f,10.0f,50.0f), glm::vec3(23.0f, 23.0f, 23.0f), 45.0f, 2.0f, 30.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 perspective = camera3D.getPerspectiveMatrix();
-	glm::mat4 modelMatrix = camera3D.getModelMatrix();
-	glm::mat4 cameraMatrix = camera3D.getCameraMatrix();
-	glm::mat4 modelCameraMatrix = modelMatrix * cameraMatrix;
+	Ackerfe::Camera3D camera3D(512, 512, glm::vec3(53.0f,53.0f,53.0f), 45.0f, 2.0f, 30.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, 1.0f, 0.0f);
+
 	 
 
 	/*Ackerfe::MultiSprite multiSprite;
@@ -137,11 +155,11 @@ int main(int argc, char** argv)
 	std::vector<Ackerfe::ACube> cubes;
 
 
-	for (float i=10.0f; i<50.0f; i+=5.0f)
+	for (float i=-50.0f; i<50.0f; i+=5.0f)
 	{
-		for (float j=10.0f; j<50.0f; j+=5.0f)
+		for (float j=-50.0f; j<50.0f; j+=5.0f)
 		{
-			for (float k = 10.0f; k < 50.0f; k += 5.0f) 
+			for (float k = -50.0f; k < 50.0f; k += 5.0f) 
 				spatialGraph.addEntityToGraph(new Ackerfe::ACube(glm::vec3(i, j, k), 1.0f, "Texture/purple.png", "Texture/green.png", "Texture/blue.png", "Texture/orange.png", "Texture/cyan.png", "Texture/yellow.png", &multiSprite2));
 
 			
@@ -156,8 +174,9 @@ int main(int argc, char** argv)
 
 	for (unsigned int i = 0; i < spatialEntityStack.size(); i++)
 	{
-		if (camera3D.isSphereInView(spatialEntityStack[i]->getPosition(), spatialEntityStack[i]->getCollisionRadius()))
+		if (camera3D.isSphereInView(spatialEntityStack[i]->getPosition(), spatialEntityStack[i]->getCollisionRadius())) {
 			spatialEntityStack[i]->renderEntity();
+		}
 
 	}
 	
@@ -171,7 +190,7 @@ int main(int argc, char** argv)
 	
 	while (!doQuit) 
 	{
-		
+		//audio.update();
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glUseProgram(programID);
 		//square.textureDraw();
@@ -179,10 +198,10 @@ int main(int argc, char** argv)
 		//multiSprite3.renderBatches();
 		//multiSprite.renderBatches();
 	
-		glUniformMatrix4fv(shaderPerspectiveID, 1, GL_FALSE, &perspective[0][0]);
-		glUniformMatrix4fv(shaderModelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
-		glUniformMatrix4fv(shaderCameraMatrixID, 1, GL_FALSE, &cameraMatrix[0][0]);
-		glUniformMatrix4fv(shaderModelCameraMatrixID, 1, GL_FALSE, &modelCameraMatrix[0][0]);
+		glUniformMatrix4fv(shaderPerspectiveID, 1, GL_FALSE, &camera3D.getPerspectiveMatrix()[0][0]);
+		glUniformMatrix4fv(shaderModelMatrixID, 1, GL_FALSE, &camera3D.getModelMatrix()[0][0]);
+		glUniformMatrix4fv(shaderCameraMatrixID, 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
+		glUniformMatrix4fv(shaderModelCameraMatrixID, 1, GL_FALSE, &camera3D.getModelCameraMatrix()[0][0]);
 
 		glUniform3f(shaderLightPositionID, 45.0f, 45.5, 45.5f);
 		glUniform3f(shaderLightColourID, 0.5f, 1.0f, 0.5f);
@@ -196,26 +215,10 @@ int main(int argc, char** argv)
 		glUseProgram(0);
 		
 		newInput.inputQueue();
-		
-
-		if (wKey.getMessage())
-		{
-			doQuit = true;
-		}
-		
-		if (kKey.getMessage())
-		{
-			camera3D.changePosition(camera3D.getPosition() + glm::vec3(0.0f, 0.0f, -0.10f));
-			perspective = camera3D.getPerspectiveMatrix();
-			modelMatrix = camera3D.getModelMatrix();
-			cameraMatrix = camera3D.getCameraMatrix();
-			modelCameraMatrix = modelMatrix * cameraMatrix;
-			kKey.clearMessage();
-		}
-		
 		newWindow.swapBuffer();
 		
 			
 	}
 	return 0;
 }
+

@@ -1,0 +1,5 @@
+SOUND
+define publisher
+leftMouse
+defined subscriber
+SoundEffects/Music/IWasTheSun.mp3

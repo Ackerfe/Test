@@ -2,12 +2,11 @@
 #include "InitFileReadWrite.h"
 #include "ErrHandler.h"
 #include <fstream>
+#include <iostream>
 
 
 namespace Ackerfe
 {
-
-
 	
 	CorrespondentManager::CorrespondentManager()
 	{
@@ -19,11 +18,18 @@ namespace Ackerfe
 
 	void CorrespondentManager::init()
 	{
+		checkConnectionRequest();
+	}
+	void CorrespondentManager::firstInit()
+	{
 		std::string filePath = "CorrespondentMasterList.txt";
 		std::vector<std::string> tempVector = readFile(filePath);
 
 		for (std::string i : tempVector)
+		{
 			createCorrespondentSignature(i);
+			std::cout << i <<std::endl;
+		}
 
 		tempVector.clear();
 		filePath = "Ini.txt";
@@ -31,11 +37,11 @@ namespace Ackerfe
 		std::string endLine = "CorrespondentManagerEnd";
 
 		extractLinesFromFile(&tempVector, startLine, endLine, filePath);
+			for (std::string i : tempVector)
+			{
+				findAllConnections(i);
 
-		for (std::string i : tempVector)
-		{
-			findAllConnections(i);
-		}
+			}
 	}
 
 	void CorrespondentManager::findAllConnections(std::string & filePath)
@@ -43,6 +49,7 @@ namespace Ackerfe
 		std::string tempString;
 		std::string currentPublisher;
 		std::ifstream fileStream(filePath);
+		
 		if (fileStream.is_open())
 		{
 			while (getline(fileStream, tempString))
@@ -51,21 +58,22 @@ namespace Ackerfe
 				{
 					getline(fileStream, tempString);
 
-					if (isCorrespondentSignature(tempString))
+					if (isCorrespondentSignature(tempString)) 
 						currentPublisher = tempString;
+						
 
 					else
-						throwError("PUBLISHER", "Program does not recognize publisher" + tempString);
+						throwError("PUBLISHER", "Program does not recognize publisher " + tempString);
 				}
 				if (tempString == "SUBSCRIBER")
 				{
 					getline(fileStream, tempString);
 
 					if (isCorrespondentSignature(tempString))
-						createSubscription(currentPublisher, tempString);
-
+						mConnectionRequest.emplace(currentPublisher, tempString);
+						
 					else
-						throwError("SUBSCRIBER", "Program does not recognize subscriber" + tempString);
+						throwError("SUBSCRIBER", "Program does not recognize subscriber " + tempString);
 				}
 			}
 
@@ -79,6 +87,7 @@ namespace Ackerfe
 		
 		for (std::multimap<std::string, std::string>::iterator currentRequest = mConnectionRequest.begin(); currentRequest != mConnectionRequest.end(); currentRequest++)
 		{
+			std::cout << std::endl << currentRequest->first + "->" +currentRequest->second;
 			auto publisher = mActiveCorrespondents.find(currentRequest->first);
 			if (publisher != mActiveCorrespondents.end())
 			{
@@ -87,19 +96,32 @@ namespace Ackerfe
 				{
 				
 					createSubscription((std::string&)currentRequest->first , currentRequest->second);
-					mConnectionRequest.erase(currentRequest);
-					return;
+				
 				}
 			}
 		}
+		mConnectionRequest.clear();
+	}
+
+	void CorrespondentManager::listNewCorrespondent(std::string & correspondentSignature, Correspondent* correspondent)
+	{
+		if (isCorrespondentSignature(correspondentSignature))
+		{
+			mActiveCorrespondents.insert(std::pair<std::string, Correspondent*>(correspondentSignature, correspondent));
+		}
+		else
+			throwError("CorrespondentError", "Correspondent " + correspondentSignature + " does not appear in CorrespondentMasterList.txt");
+
 	}
 
 	void CorrespondentManager::createSubscription(std::string & subscriber, std::string & publisher)
 	{
+		Correspondent* correspondent;
 		auto doesSubscriberExist = mActiveCorrespondents.find(subscriber);
 		if (doesSubscriberExist == mActiveCorrespondents.end())
 		{
 			mConnectionRequest.emplace(publisher, subscriber);
+		
 		}
 
 		auto doesPublisherExist = mActiveCorrespondents.find(publisher);
@@ -108,8 +130,10 @@ namespace Ackerfe
 			mConnectionRequest.emplace(publisher, subscriber);
 			
 		}
+
+
 	
-		doesPublisherExist->second->receiveSubscriber(subscriber, mActiveCorrespondents.find(subscriber)->second);
+		doesPublisherExist->second->receiveSubscriber(subscriber, doesSubscriberExist->second);
 	}
 
 	void CorrespondentManager::cancelSubscription(std::string & subscriber, std::string & publisher)
@@ -125,16 +149,7 @@ namespace Ackerfe
 
 	}
 
-	void CorrespondentManager::listNewCorrespondent(std::string & correspondentSignature, Correspondent* correspondent)
-	{
-		if (isCorrespondentSignature(correspondentSignature))
-		{
-			mActiveCorrespondents.insert(std::pair<std::string, Correspondent*>(correspondentSignature, correspondent));
-		}
-		else
-			throwError("CorrespondentError", "Correspondent" + correspondentSignature + " does not appear in CorrespondentMasterList.txt");
-		
-	}
+	
 
 	void CorrespondentManager::delistCorrespondent(std::string & correspondentSignature)
 	{

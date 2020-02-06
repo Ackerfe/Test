@@ -158,6 +158,7 @@
     <Text Include="CorrespondentMasterList.txt" />
     <Text Include="Ini.txt" />
     <Text Include="Keymap.txt" />
+    <Text Include="SoundMap1.txt" />
     <Text Include="TextureVert.vert" />
   </ItemGroup>
   <ItemGroup>

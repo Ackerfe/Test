@@ -10,6 +10,7 @@ namespace Ackerfe
 		std::unordered_map<unsigned int, Correspondent> mKeyMap;
 		CorrespondentManager* mManager;
 		Correspondent mToGUI;
+		Correspondent mMouseSender;
 
 	public:
 		InputHandler();
