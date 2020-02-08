@@ -11,12 +11,10 @@ InputHandlerEnd
 
 PUBLISHER
 InputToGUISender
-
 SUBSCRIBER
 InputToGUIReceiver
 
 PUBLISHER
 CameraLookAtSender
-
 SUBSCRIBER
 CameraLookAtReceiver

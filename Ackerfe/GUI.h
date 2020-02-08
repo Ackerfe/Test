@@ -12,11 +12,10 @@ namespace Ackerfe {
 		CEGUI::GUIContext* mContext = nullptr;
 		CEGUI::Window* mRoot = nullptr;
 		unsigned int mPreviousTime = 0;
-		int mGet_fX, mGetfY;
 		Correspondent mFromInput;
 
 	public:
-		void init(std::string& resourceDirectory, CorrespondentManager* corrManager);
+		void init(const std::string& resourceDirectory, CorrespondentManager* corrManager);
 		void destroy();
 		void update();
 		void render();
@@ -27,7 +26,7 @@ namespace Ackerfe {
 
 		void keyUpFunc(SDL_Event &keyEvent);
 		void keyDownFunc(SDL_Event &keyEvent);
-		void mouseMotionFunc(SDL_Event &motionEvent);
+		void mouseMotionFunc(SDL_Event &mouseEvent);
 		void decodeInputText(SDL_Event &textEvent);
 		void mouseButtonDownFunc(SDL_Event &buttonEvent);
 		void mouseButtonUpFunc(SDL_Event &buttonEvent);

@@ -4,16 +4,19 @@ namespace Ackerfe
 {
 	void errorCheck(FMOD_RESULT result, std::string failLine)
 	{
-		if (result != FMOD_OK)
+		if (result != FMOD_OK) {
 			throwError("FMODerror", failLine);
+		}
 	}
 
 	void AAudio::init(std::string &initialSoundMapFilePath, CorrespondentManager* corrManager)
 	{
+		
 		errorCheck(FMOD::System_Create(&mSystem), "System failed to be created");
 		errorCheck(mSystem->init(8, FMOD_INIT_NORMAL, NULL), "FMOD System failed to initialize");
 		mManager = corrManager;
 		loadSoundMap(initialSoundMapFilePath);
+		
 	}
 
 	
@@ -28,9 +31,8 @@ namespace Ackerfe
 		{
 			while (getline(fileStream, tempString))
 			{
-				if (tempString == "Sound")
+				if (tempString == "SOUND")
 				{
-					getline(fileStream, tempString);
 					getline(fileStream, tempString);
 					getline(fileStream, tempString);
 					getline(fileStream, tempString);
@@ -65,7 +67,7 @@ namespace Ackerfe
 	{ 
 		soundReceiver.init(corrManager, soundFile);
 		mSystem = system;
-		errorCheck(mSystem->createSound(soundFile.c_str(), FMOD_DEFAULT, NULL, &mSound), "Sound" + soundFile + " could not be initialized");
+		errorCheck(mSystem->createSound(soundFile.c_str(), FMOD_DEFAULT, NULL, &mSound), "Sound " + soundFile + " could not be initialized");
 	}
 
 	void ASound::update()

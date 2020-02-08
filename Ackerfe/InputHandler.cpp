@@ -1,5 +1,4 @@
 #include "InputHandler.h"
-#include "ErrHandler.h"
 #include <fstream>
 
 namespace Ackerfe
@@ -16,7 +15,7 @@ namespace Ackerfe
 	{
 		mManager = corrManager;
 		std::string tempString = "InputToGUISender";
-		mToGUI.init(mManager, tempString);
+		mToGUI.init(corrManager, tempString);
 		tempString = "CameraLookAtSender";
 		mMouseSender.init(corrManager, tempString);
 
@@ -58,13 +57,13 @@ namespace Ackerfe
 					getline(fileStream, tempString);
 					getline(fileStream, tempString);
 					currentKey = tempString;
-					std::cout << currentKey;
+					
 				}
 				if (tempString == "KEYCODE")
 				{
 					getline(fileStream, tempString);
 					mapKey(std::stoi(tempString, nullptr, 10), currentKey);
-					std::cout << tempString;
+					
 				}
 			}
 		}
@@ -84,6 +83,7 @@ namespace Ackerfe
 	{
 	
 		SDL_Event evnt;
+
 		while (SDL_PollEvent(&evnt))
 		{
 			mToGUI.publish(evnt);
@@ -104,7 +104,8 @@ namespace Ackerfe
 				break;
 
 			case SDL_MOUSEMOTION:
-				mMouseSender.publish(glm::vec2((float)evnt.motion.xrel, (float)evnt.motion.yrel));
+				glm::vec2 mouseMotion = glm::vec2((float)evnt.motion.xrel, (float)evnt.motion.yrel);
+				mMouseSender.publish(mouseMotion);
 				break;
 			}
 		}

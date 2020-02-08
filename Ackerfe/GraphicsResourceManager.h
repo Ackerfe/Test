@@ -6,8 +6,8 @@ namespace Ackerfe
 	class GraphicsResourceManager
 	{
 	public:
-		MultiSprite mMultisprite2D;
-		MultiSprite mMultisprite3D;
+		MultiSprite mMultiSprite2D;
+		MultiSprite mMultiSprite3D;
 
 
 	};

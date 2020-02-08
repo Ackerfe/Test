@@ -123,10 +123,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;%(AdditionalDependencies);SDL2_ttf.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;fmodL_vc.lib;fmodstudioL_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;fmodL_vc.lib;fmodL64_vc.lib;fmodstudioL_vc.lib;fmodstudioL64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/lib/Debug/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/lib/Debug/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -149,10 +149,10 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;SDL2_ttf.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;fmodstudio_vc.lib;fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;glew32.lib;opengl32.lib;SDL2_ttf.lib;CEGUIBase-0.lib;CEGUIOpenGLRenderer-0.lib;fmod_vc.lib;fmod64_vc.lib;fmodstudio_vc.lib;fmodstudio64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Lib>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/lib/Release/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies/lib/Release/%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

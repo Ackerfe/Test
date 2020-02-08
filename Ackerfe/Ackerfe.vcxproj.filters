@@ -98,9 +98,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ackerfe.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Cameras.cpp">
       <Filter>Header Files\Graphics</Filter>
     </ClCompile>
@@ -159,6 +156,9 @@
       <Filter>Header Files\SDL</Filter>
     </ClCompile>
     <ClCompile Include="MessagingSystem.cpp">
+      <Filter>Header Files\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Ackerfe.h">
       <Filter>Header Files\Global</Filter>
     </ClCompile>
   </ItemGroup>

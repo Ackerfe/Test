@@ -1,5 +1,4 @@
 #pragma once
-
 #include "glm-0.9.9.7/glm/glm.hpp"
 #include "glm-0.9.9.7/glm/gtc/matrix_transform.hpp"
 #include <vector>
@@ -42,7 +41,7 @@ namespace Ackerfe
 
 	class Camera3D
 	{
-		void update();
+		
 
 		glm::vec3 mPosition;
 
@@ -64,10 +63,10 @@ namespace Ackerfe
 		float mFarClippingDistance;
 		float mFieldOfView;
 
-		float mForward = -0.2f;
-		float mBack = 0.2f;
-		float mLeft = -0.2f;
-		float mRight = 0.2f;
+		float mForward = 0.2f;
+		float mBack = -0.2f;
+		float mLeft = 0.2f;
+		float mRight = -0.2f;
 		float mUp = 0.2f;
 		float mDown = -0.2f;
 
@@ -98,6 +97,7 @@ namespace Ackerfe
 		glm::vec3 getPosition() { return mPosition; }
 		void changePosition(glm::vec3 newPosition);
 		void createFrustum();
+		void update();
 		bool isSphereInView(glm::vec3 centerPoint, float radius);
 		bool isBoxInView(std::vector<glm::vec3> points);
 	};

@@ -1,13 +1,9 @@
 #pragma once
-
 #include <map>
 #include <memory>
-#include <string>
 #include <vector>
 #include "glm-0.9.9.7/glm/glm.hpp"
 #include "SDL/SDL_events.h"
-
-
 
 namespace Ackerfe
 {
@@ -22,8 +18,8 @@ namespace Ackerfe
 		glm::vec2 getMouseMessage() { return mouseCoords; }
 		glm::vec2 mouseCoords;
 	};
-	
-	struct EventMessage :Message
+
+	struct EventMessage : Message
 	{
 		SDL_Event getEventMessage() { return evnt; }
 		SDL_Event evnt;
@@ -33,43 +29,34 @@ namespace Ackerfe
 
 	class CorrespondentManager
 	{
-		std::map<std::string, Correspondent*> mActiveCorrespondents;
-		std::multimap<std::string, std::string> mConnectionRequest;
-		std::vector<std::string> mAllPossibleCorrespondentSignatures;
-		
 	public:
-
 		CorrespondentManager();
 		~CorrespondentManager();
 
-		void firstInit();
 		void init();
+
 		void findAllConnections(std::string &filePath);
 
-		void checkConnectionRequest();
+		void checkConnectionRequests();
 
 		void createSubscription(std::string &subscriber, std::string &publisher);
 		void cancelSubscription(std::string &subscriber, std::string &publisher);
 
 		void listNewCorrespondent(std::string &correspondentSignature, Correspondent* correspondent);
-		void delistCorrespondent(std::string &correspondentSignature);
+		void deListCorrespondent(std::string &correspondentSignature);
 
 		void createCorrespondentSignature(std::string &signature);
 		void removeCorrespondentSignature(std::string &signature);
 		bool isCorrespondentSignature(std::string &signature);
-
+	private:
+		std::map<std::string, Correspondent*> activeCorrespondents;
+		std::multimap<std::string, std::string> connectionRequests;
+		std::vector<std::string> mAllPossibleCorrespondentSignatures;
 	};
 
 	class Correspondent
 	{
-		CorrespondentManager* mManager;
-		std::map<std::string, Correspondent*> mSubscribers;
-		std::shared_ptr<Message> mMessage;
-		std::string mSignature;
-
-
 	public:
-
 		Correspondent();
 		~Correspondent();
 
@@ -78,14 +65,14 @@ namespace Ackerfe
 
 		void passToSubscribers(std::shared_ptr<Message> messagePtr);
 
-		void receiveSubscriber(std::string &subscriberSignature, Correspondent* subscriber = nullptr);
+		void recieveSubscriber(std::string &subscriberSignature, Correspondent* subscriber = nullptr);
 		void removeSubscriber(std::string &subscriberSignature);
 
 		void publish();
-		void publish(glm::vec2 mouseCoords);
+		void publish(glm::vec2 &mouseCoords);
 		void publish(SDL_Event &evnt);
 
-		void receiveMessage(std::shared_ptr<Message> message);
+		void recieveMessage(std::shared_ptr<Message> message);
 
 		bool getMessage();
 		glm::vec2 getMouseMessage();
@@ -93,9 +80,10 @@ namespace Ackerfe
 
 		void clearMessage();
 
-
+	private:
+		CorrespondentManager* mManager;
+		std::map<std::string, Correspondent*> mSubscribers;
+		std::shared_ptr<Message> mMessage;
+		std::string mSignature;
 	};
-
-	
-
 }

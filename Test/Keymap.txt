@@ -4,7 +4,7 @@ w
 KEYCODE
 119
 SUBSCRIBER
-wKey
+CameraMoveForwardReceiver
 
 KEY
 PUBLISHER
@@ -12,7 +12,7 @@ a
 KEYCODE
 97
 SUBSCRIBER
-aKey
+CameraMoveLeftReceiver
 
 KEY
 PUBLISHER
@@ -20,7 +20,7 @@ s
 KEYCODE
 115
 SUBSCRIBER
-sKey
+CameraMoveBackReceiver
 
 KEY
 PUBLISHER
@@ -28,7 +28,7 @@ d
 KEYCODE
 100
 SUBSCRIBER
-dKey
+CameraMoveRightReceiver
 
 KEY
 PUBLISHER
@@ -36,7 +36,7 @@ leftShift
 KEYCODE
 1073742049
 SUBSCRIBER
-leftShiftKey
+CameraMoveDownReceiver
 
 KEY
 PUBLISHER
@@ -44,7 +44,7 @@ spacebar
 KEYCODE
 32
 SUBSCRIBER
-spacebarKey
+CameraMoveUpReceiver
 
 KEY
 PUBLISHER

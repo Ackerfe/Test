@@ -10,7 +10,7 @@ void GameLogo::init(std::string vertShader, std::string fragShader, int screenWi
 	mScreenHeight = screenHeight;
 	mWindow = window;
 	mGraphics = graphics;
-	mGraphics->mMultisprite2D.init();
+	mGraphics->mMultiSprite2D.init();
 }
 
 void GameLogo::logoUpdateRenderLoop()
@@ -24,31 +24,31 @@ void GameLogo::logoUpdateRenderLoop()
 	float threeQuartersScreenHeight = mScreenHeight - quarterScreenHeight;
 	float threeQuartersScreenWidth = mScreenWidth - quarterScreenWidth;
 
-	mGraphics->mMultisprite2D.addSprite(BackGroundTextureID, 0.0f,
+	mGraphics->mMultiSprite2D.addSprite(BackGroundTextureID, 0.0f,
 		Ackerfe::Vertex(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
 		Ackerfe::Vertex(0.0f, mScreenHeight, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
 		Ackerfe::Vertex(mScreenWidth, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
 		Ackerfe::Vertex(mScreenWidth, mScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
 
-	mGraphics->mMultisprite2D.addSprite(BackGroundTextureID, 0.0f,
+	mGraphics->mMultiSprite2D.addSprite(BackGroundTextureID, 0.0f,
 		Ackerfe::Vertex(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(0, 0, 0, 255)),
 		Ackerfe::Vertex(0.0f, quarterScreenHeight, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(0, 0, 0, 255)),
 		Ackerfe::Vertex(mScreenWidth, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(0, 0, 0, 255)),
 		Ackerfe::Vertex(mScreenWidth, quarterScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(0, 0, 0, 255)));
 
-	mGraphics->mMultisprite2D.addSprite(BackGroundTextureID, 0.0f,
+	mGraphics->mMultiSprite2D.addSprite(BackGroundTextureID, 0.0f,
 		Ackerfe::Vertex(0.0f, threeQuartersScreenHeight, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(0, 0, 0, 255)),
 		Ackerfe::Vertex(0.0f, mScreenHeight, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(0, 0, 0, 255)),
 		Ackerfe::Vertex(mScreenWidth, threeQuartersScreenHeight, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(0, 0, 0, 255)),
 		Ackerfe::Vertex(mScreenWidth, mScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(0, 0, 0, 255)));
 
-	mGraphics->mMultisprite2D.addSprite(Ackerfe::loadPng("Texture/test.png"), 0.0f,
+	mGraphics->mMultiSprite2D.addSprite(Ackerfe::loadPng("Texture/test.png"), 0.0f,
 		Ackerfe::Vertex(quarterScreenWidth, threeQuartersScreenHeight, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
 		Ackerfe::Vertex(quarterScreenWidth, quarterScreenHeight, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
 		Ackerfe::Vertex(threeQuartersScreenWidth, threeQuartersScreenHeight, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)),
 		Ackerfe::Vertex(threeQuartersScreenWidth, quarterScreenHeight, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, Ackerfe::ColourRGBA8(255, 255, 255, 255)));
 
-	mGraphics->mMultisprite2D.prepareBatches();
+	mGraphics->mMultiSprite2D.prepareBatches();
 
 	int startTime = SDL_GetTicks();
 	int currentTime = startTime;
@@ -59,15 +59,15 @@ void GameLogo::logoUpdateRenderLoop()
 	{
 		if (logoTime < 4000)
 		{
-			mGraphics->mMultisprite2D.setSpriteAlpha(3, pow((logoTime/251), 2.0f));
-			mGraphics->mMultisprite2D.prepareBatches();
+			mGraphics->mMultiSprite2D.setSpriteAlpha(3, pow((logoTime/251), 2.0f));
+			mGraphics->mMultiSprite2D.prepareBatches();
 			render();
 		}
 
 		else
 		{
-			mGraphics->mMultisprite2D.setSpriteAlpha(3, 255);
-			mGraphics->mMultisprite2D.prepareBatches();
+			mGraphics->mMultiSprite2D.setSpriteAlpha(3, 255);
+			mGraphics->mMultiSprite2D.prepareBatches();
 			render();
 		}
 		currentTime = SDL_GetTicks();
@@ -86,7 +86,7 @@ void GameLogo::render()
 	glUniformMatrix4fv(mPerspectiveUniformID, 1, GL_FALSE, &mOrthoMatrix[0][0]);
 
 
-	mGraphics->mMultisprite2D.renderBatches();
+	mGraphics->mMultiSprite2D.renderBatches();
 
 	glUseProgram(0);
 

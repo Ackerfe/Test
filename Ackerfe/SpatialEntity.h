@@ -10,6 +10,10 @@ namespace Ackerfe
 	{
 
 	public:
+
+		SpatialEntity();
+		~SpatialEntity();
+
 		glm::vec3 getPosition() { return mPosition; }
 		FrustumCullingType getCollisionType() { return mCollisionType; }
 		virtual float getCollisionRadius();

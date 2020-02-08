@@ -163,36 +163,6 @@ namespace Ackerfe
 
 	void Camera3D::update()
 	{	
-		if (mForwardReceiver.getMessage())
-		{
-			mPosition += mLookAtPosition * mForward;
-			mForwardReceiver.clearMessage();
-		}
-		if (mBackReceiver.getMessage())
-		{
-			mPosition += mLookAtPosition * mBack;
-			mBackReceiver.clearMessage();
-		}
-		if (mLeftReceiver.getMessage())
-		{
-			mPosition += mLeft * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
-			mLeftReceiver.clearMessage();
-		}
-		if (mRightReceiver.getMessage())
-		{
-			mPosition += mRight * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
-			mRightReceiver.clearMessage();
-		}
-		if (mUpReceiver.getMessage())
-		{
-			mPosition += glm::vec3(0.0f, mUp, 0.0f);
-			mUpReceiver.clearMessage();
-		}
-		if (mDownReceiver.getMessage())
-		{
-			mPosition += glm::vec3(0.0f, mDown, 0.0f);
-			mDownReceiver.clearMessage();
-		}
 		if (mLookAtReceiver.getMessage())
 		{
 			glm::vec2 mouseCoordsChange = mLookAtReceiver.getMouseMessage();
@@ -202,12 +172,45 @@ namespace Ackerfe
 			mLookAtReceiver.clearMessage();
 		}
 
+		if (mForwardReceiver.getMessage())
+		{
+			mPosition += mLookAtPosition * mForward;
+			mForwardReceiver.clearMessage();
+		}
+
+		if (mBackReceiver.getMessage())
+		{
+			mPosition += mLookAtPosition * mBack;
+			mBackReceiver.clearMessage();
+		}
+
+		if (mLeftReceiver.getMessage())
+		{
+			mPosition += mLeft * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
+			mLeftReceiver.clearMessage();
+		}
+
+		if (mRightReceiver.getMessage())
+		{
+			mPosition += mRight * glm::cross(glm::vec3(0.0f, 1.0f, 0.0f), mLookAtPosition);
+			mRightReceiver.clearMessage();
+		}
+
+		if (mUpReceiver.getMessage())
+		{
+			mPosition += glm::vec3(0.0f, mUp, 0.0f);
+			mUpReceiver.clearMessage();
+		}
+
+		if (mDownReceiver.getMessage())
+		{
+			mPosition += glm::vec3(0.0f, mDown, 0.0f);
+			mDownReceiver.clearMessage();
+		}
+
 		mPerspectiveMatrix = glm::perspective(glm::radians(mFieldOfView), mScreenRatio, mNearClippingDistance, mFarClippingDistance);
-
 		mCameraMatrix = glm::lookAt(mPosition, mPosition + mLookAtPosition, glm::vec3(0.0f, 1.0f, 0.0f));
-
 		mModelMatrix = glm::mat4(1.0f);
-
 		mPerspectiveProj = mPerspectiveMatrix * mCameraMatrix * mModelMatrix;
 
 		
