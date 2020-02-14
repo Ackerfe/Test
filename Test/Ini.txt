@@ -1,2 +1,21 @@
-Initialization File
+
 Debug
+
+CorrespondentManager
+Ini.txt
+KeyMap.txt
+CorrespondentManagerEnd
+
+InputHandler
+KeyMap.txt
+InputHandlerEnd
+
+PUBLISHER
+InputToGUISender
+SUBSCRIBER
+InputToGUIReceiver
+
+PUBLISHER
+CameraLookAtSender
+SUBSCRIBER
+CameraLookAtReceiver

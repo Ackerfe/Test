@@ -30,7 +30,7 @@ void main()
 	vec3 reflectionDirection = reflect(-pixelToLight,vertexCameraNormal);
 	float cosAlpha = clamp( dot(pixelToCamera,reflectionDirection), 0,1);
 	
-	colour = vec4(
+	colour = vec4(MaterialAmbientColour +
 	MaterialDiffuseColour * LightColour * LightIntensity * cosTheta / (distance*distance) +
 	MaterialSpecularColour * LightColour * LightIntensity * pow(cosAlpha,5) /  (distance*distance), 1);
 }

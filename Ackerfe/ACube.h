@@ -3,9 +3,8 @@
 #include <glm-0.9.9.7/glm/glm.hpp>
 #include <vector>
 #include <math.h>
+#include "ImageLoad.h"
 #include "SpatialEntity.h"
-#include "ACollision.h"
-#include "GL/glew.h"
 
 namespace Ackerfe
 {
@@ -14,18 +13,15 @@ namespace Ackerfe
 		MultiSprite* mMultiSprite;
 		float mSideLength;
 		std::vector<GLuint> mTextures;
-		ACollAABB mBox;
 	public:
 
-		ACube(glm::vec3 position, float sideLength, GLuint firstTextureFilePath, GLuint secondTextureFilePath, GLuint thirdTextureFilePath, 
-			GLuint fourthTextureFilePath, GLuint fifthTextureFilePath, GLuint sixthTextureFilePath, MultiSprite* multiSprite);
+		ACube(glm::vec3 position, float sideLength, GLuint frontSprite, GLuint backSprite, GLuint leftSprite,
+			GLuint rightSprite, GLuint topSprite, GLuint bottomSprite, MultiSprite* multiSprite);
 		~ACube();
 
 		glm::vec3 getPosition() { return mPosition; }
 		float getCollisionRadius() { return mSideLength; }
 		void renderEntity();
-
-		ACollAABB* getBox() { return &mBox; }
 
 
 

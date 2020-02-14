@@ -21,7 +21,7 @@ namespace Ackerfe
 		glBindBuffer(GL_ARRAY_BUFFER, mVboID);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vboData), vboData, GL_STATIC_DRAW);
 
-		mTexture = Ackerfe::loadPNG(textureFilePath);
+		mTexture = Ackerfe::loadPng(textureFilePath);
 		glGenBuffers(1, &mUVBuffer);
 
 		glBindBuffer(GL_ARRAY_BUFFER, mUVBuffer);

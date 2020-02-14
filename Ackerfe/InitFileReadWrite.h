@@ -4,14 +4,20 @@
 
 namespace Ackerfe
 {
-	/*Legge il file ini e fa sì che possa essere usato dal programma*/
 	std::vector<std::string> readInitFile();
-	/*Seleziona una sola riga dal file ini e la rende usabile dal programma*/
+
+	std::vector<std::string> readFile(std::string &filePath);
+
+	/*Make a single line from the init file availible for reading.*/
 	std::string readInitFileLine(unsigned int lineNumber);
-	/*Scrive o sostituisce il file ini con il vettore di righe initContents*/
+
+	/*Make or Replace the initialization file.*/
 	void writeInitFile(std::vector<std::string> initContents);
-	/*Sostituisce la riga lineNumber del file ini con la stringa replacementString*/
+
+	/*Replace a single line in the init file.*/
 	void writeInitFileLine(unsigned int lineNumber, std::string replacementString);
+
+	void extractLinesFromFile(std::vector<std::string> *addTo, std::string &startLineMinusOne, std::string &endLinePlusOne, std::string &filePath);
 
 }
 
