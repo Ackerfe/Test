@@ -18,6 +18,12 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameLogo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleVert.vert">
@@ -29,10 +35,54 @@
     <None Include="TextureFrag.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Logo.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Logo.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Mesh.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Mesh.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Billboard.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Billboard.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Skybox.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Skybox.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TextureVert.vert">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Ini.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Keymap.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="CorrespondentMasterList.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="SoundMap1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameLogo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,58 +1,118 @@
 #include "InputHandler.h"
-#include "AckerfeErrorHandler.h"
+#include "InitFileReadWrite.h"
 
 namespace Ackerfe
 {
+
 	InputHandler::InputHandler()
 	{
 	}
+
 
 	InputHandler::~InputHandler()
 	{
 	}
 
-	void InputHandler::pressKey(unsigned int keyID)
+
+	void InputHandler::init(CorrespondentManager *corrManager,
+		OSInterface * osInterface)
 	{
-		mKeyMap[keyID] = true;
+		mOSInterface = osInterface;
+		mCorrespondentManager = corrManager;
+
+		auto newMotion = std::make_unique<MotOspondent>();
+		std::string tempString = "CameraLookAtSender";
+		newMotion->corr.init(mCorrespondentManager,
+			tempString);
+		newMotion->relative = true;
+		mMotions.push_back(std::move(newMotion));
+
+		tempString = "Ini.txt";
+		std::string tempStart = "InputHandler";
+		std::string tempEnd = "InputHandlerEnd";
+		std::vector<std::string> tempVector;
+		extractLinesFromFile(&tempVector, tempStart, tempEnd, tempString);
+
+		for (std::string i : tempVector)
+		{
+			findAllKeys(i);
+		}
 	}
 
-	bool InputHandler::isKeyDown(unsigned int keyID)
+	void InputHandler::findAllKeys(std::string & filePath)
 	{
-		auto it = mKeyMap.find(keyID);
-		if (it != mKeyMap.end()) 
-			return it->second;
-		else {
-			return false;
+		std::string tempString;
+		std::string currentKey;
+		std::ifstream fileStream(filePath);
+		if (fileStream.is_open())
+		{
+			while (getline(fileStream, tempString))
+			{
+				if (tempString == "KEY")
+				{
+					getline(fileStream, tempString);
+					getline(fileStream, tempString);
+					currentKey = tempString;
+				}
+
+				if (tempString == "KEYCODE")
+				{
+					getline(fileStream, tempString);
+					mapKey(std::stoi(tempString, nullptr, 10), currentKey);
+				}
+			}
 		}
-		/*
 		else
 		{
-			throwError("KeyBindings", "Il tasto selezionato non fa parte dei KeyBindings");
-			return false;
+			throwError(filePath, filePath + " could not be opened.");
 		}
-		*/
 	}
+
+	void InputHandler::mapKey(unsigned int keyID, std::string & signature)
+	{
+		auto newKey = std::make_unique<KeyOspondent>();
+		newKey->corr.init(mCorrespondentManager, signature);
+		newKey->cond.down = true;
+		newKey->cond.key = keyID;
+		mKeys.push_back(std::move(newKey));
+	}
+
+	void InputHandler::mapMouse(unsigned int buttonID, std::string & signature)
+	{
+		auto newButton = std::make_unique<MouseOspondent>();
+		newButton->corr.init(mCorrespondentManager, signature);
+		newButton->cond.down = true;
+		newButton->cond.button = buttonID;
+		mButtons.push_back(std::move(newButton));
+	}
+
 	void InputHandler::inputQueue()
 	{
-		SDL_Event evnt;
-		while (SDL_PollEvent(&evnt))
+		InputState state = mOSInterface->getInput();
+
+		for (unsigned int i = 0; i < state.mButtons.size(); i++)
 		{
-			switch (evnt.type)
+			for (unsigned int j = 0; j < mButtons.size(); j++)
 			{
-				case SDL_QUIT:
-				{
-					SDL_Quit();
-					exit(60);
-					break;
-				}
-				case SDL_KEYDOWN:
-				{
-					pressKey(evnt.key.keysym.sym);
-					break;
-				}
-				default:
-					break;
+				mButtons[j]->update(&state.mButtons[i]);
+			}
+		}
+
+		for (unsigned int i = 0; i < state.mKeys.size(); i++)
+		{
+			for (unsigned int j = 0; j < mKeys.size(); j++)
+			{
+				mKeys[j]->update(&state.mKeys[i]);
+			}
+		}
+
+		for (unsigned int i = 0; i < state.mMotions.size(); i++)
+		{
+			for (unsigned int j = 0; j < mMotions.size(); j++)
+			{
+				mMotions[j]->update(&state.mMotions[i]);
 			}
 		}
 	}
+
 }

@@ -42,6 +42,6 @@ namespace Ackerfe
 
 	void WindowHandler::swapBuffer()
 	{
-		SDL_GL_SwapWindow(msdlWindow);
+		
 	}
 }

@@ -1,0 +1,20 @@
+w
+a
+s
+d
+leftShift
+spacebar
+leftMouse
+InputToGUISender
+InputToGUIReceiver
+CameraMoveUpReceiver
+CameraMoveDownReceiver
+CameraMoveLeftReceiver
+CameraMoveRightReceiver
+CameraMoveForwardReceiver
+CameraMoveBackReceiver
+CameraLookAtReceiver
+CameraLookAtSender
+SoundEffects/Guns/Laser Gun.wav
+p
+QuitGame

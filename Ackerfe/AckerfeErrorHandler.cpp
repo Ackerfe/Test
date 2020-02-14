@@ -23,7 +23,6 @@ namespace Ackerfe
 
 		/*Pop up a window indicating there was an error, print out the errorWord, as well as the filepath to the error file*/
 
-		SDL_Quit();
 		exit(60);
 	}
 	void throwConsoleError(std::string errorString)
@@ -33,7 +32,6 @@ namespace Ackerfe
 		std::cin >> a;
 		if (a == 0)
 		{
-			SDL_Quit();
 			exit(60);
 		}
 	}

@@ -1,0 +1,5 @@
+SOUND
+define publisher
+leftMouse
+defined subscriber
+SoundEffects/Guns/Laser Gun.wav
