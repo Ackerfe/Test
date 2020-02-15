@@ -150,6 +150,8 @@
   <ItemGroup>
     <None Include="Billboard.frag" />
     <None Include="Billboard.vert" />
+    <None Include="Fog.frag" />
+    <None Include="Fog.vert" />
     <None Include="Logo.frag" />
     <None Include="Logo.vert" />
     <None Include="Mesh.frag" />

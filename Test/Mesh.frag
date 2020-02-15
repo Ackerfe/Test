@@ -1,10 +1,11 @@
 #version 330 core
-
+layout(location = 0) out vec4 out_color;
 in vec2 UV;
 in vec3 VertexWorldPosition;
 in vec3 VertexToCamera;
 in vec3 LightToCamera;
 in vec3 VertexCameraNormal;
+in vec4 viewSpace;
 
 uniform sampler2D myTextureSampler;
 uniform vec3 LightPosition;
@@ -12,7 +13,14 @@ uniform mat4 ModelCameraMatrix;
 uniform vec3 LightColour;
 uniform float LightIntensity;
 
-out vec4 colour;
+uniform vec3 eye_position;
+
+//can pass them as uniforms
+const vec3 DiffuseLight = vec3(0.01, 0.01, 0.01);
+const vec3 RimColor = vec3(0.3, 0.3, 0.5);
+const vec3 fogColor = vec3(0.5, 0.5,0.6);
+const float FogDensity = 0.05;
+
 
 void main()
 {
@@ -29,8 +37,45 @@ void main()
 	vec3 pixelToCamera = normalize(VertexToCamera);
 	vec3 reflectionDirection = reflect(-pixelToLight,vertexCameraNormal);
 	float cosAlpha = clamp( dot(pixelToCamera,reflectionDirection), 0,1);
+
+	vec3 L = normalize( LightPosition - VertexWorldPosition);
+	vec3 V = normalize( LightPosition - VertexWorldPosition);
+ 
+	//diffuse lighting
+	vec3 diffuse = DiffuseLight * max(0, dot(L,VertexCameraNormal));
+ 
+	//rim lighting
+	float rim = 1 - max(dot(V, VertexCameraNormal), 0.0);
+	rim = smoothstep(0.6, 1.0, rim);
+	vec3 finalRim = RimColor * vec3(rim, rim, rim);
+	//get all lights and texture
+	vec3 lightColor = finalRim  + MaterialDiffuseColour;
+ 
+	vec3 finalColor = vec3(0, 0, 0);
+ 
+	//distance
+	float dist = 0;
+	float fogFactor = 0;
+ 
+
+	//range based
+	dist = length(viewSpace);
+
+ 
+	// 20 - fog starts; 80 - fog ends
+	fogFactor = (30 - dist)/(30 - 1000);
+	fogFactor = clamp( fogFactor, 0.0, 1.0 );
+ 
+	//if you inverse color in glsl mix function you have to
+	 //put 1.0 - fogFactor
+	 finalColor = mix(MaterialDiffuseColour, fogColor, fogFactor);
+ 
+	//show fogFactor depth(gray levels)
+	//fogFactor = 1 - fogFactor;
+	//out_color = vec4( fogFactor, fogFactor, fogFactor,1.0 );
+	out_color = vec4(finalColor, 1);
 	
-	colour = vec4(MaterialAmbientColour +
-	MaterialDiffuseColour * LightColour * LightIntensity * cosTheta / (distance*distance) +
-	MaterialSpecularColour * LightColour * LightIntensity * pow(cosAlpha,5) /  (distance*distance), 1);
+	//colour = vec4(MaterialAmbientColour +
+	//MaterialDiffuseColour * LightColour * LightIntensity * cosTheta / (distance*distance) +
+	//MaterialSpecularColour * LightColour * LightIntensity * pow(cosAlpha,5) /  (distance*distance), 1);
 }

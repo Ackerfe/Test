@@ -9,6 +9,9 @@ uniform mat4 CameraMatrix;
 uniform mat4 ModelMatrix;
 
 out vec3 TexCoord0;
+out vec3 VertexWorldPosition;
+out vec3 VertexCameraNormal;
+out vec4 viewSpace;
 
 void main()
 {
@@ -16,5 +19,8 @@ void main()
 
 	gl_Position = pos.xyww;
 
+	VertexWorldPosition = (ModelMatrix * vec4(vertexPosition, 1.0)).xyz;
+	VertexCameraNormal = (CameraMatrix * ModelMatrix * vec4(vertexNormal, 0)).xyz;
+	viewSpace = CameraMatrix * ModelMatrix * vec4(vertexPosition,1.0);
 	TexCoord0 = vertexPosition;
 }

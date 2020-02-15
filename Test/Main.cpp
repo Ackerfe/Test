@@ -90,6 +90,7 @@ int main(int argc, char** argv)
 	GLint shaderModelCameraMatrixIDm = glGetUniformLocation(meshProgramID, "ModelCameraMatrix");
 	GLint shaderLightColourIDm = glGetUniformLocation(meshProgramID, "LightColour");
 	GLint shaderLightIntensityIDm = glGetUniformLocation(meshProgramID, "LightIntensity");
+	
 
 	GLuint billboardProgramID = Ackerfe::compileLinkSimpleShaders("Billboard.vert", "Billboard.frag");
 	GLint shaderPerspectiveIDma = glGetUniformLocation(billboardProgramID, "Perspective");
@@ -101,6 +102,8 @@ int main(int argc, char** argv)
 	GLint skyboxPerspectiveIDma = glGetUniformLocation(skyboxProgramID, "Perspective");
 	GLint skyboxCameraMatrixIDma = glGetUniformLocation(skyboxProgramID, "CameraMatrix");
 	GLint skyboxModelMatrixIDma = glGetUniformLocation(skyboxProgramID, "ModelMatrix");
+	GLint shaderLightColourIDma = glGetUniformLocation(skyboxProgramID, "LightPosition");
+
 
 	Ackerfe::Camera2D camera2D(512, 512, glm::vec2(0.0f, 0.0f), 1.0f);
 	glm::mat4 ortho = camera2D.getMatrix();
@@ -269,7 +272,6 @@ int main(int argc, char** argv)
 	srand(time(NULL));
 	std::vector<Ackerfe::ACollSphr> meshSphr;
 	bool hit = false;
-	glm::vec3 *pos = nullptr;
 	float radius;
 	bool createSphr = true;
 	bool printPos = true;
@@ -329,7 +331,7 @@ int main(int argc, char** argv)
 		//}
 
 
-
+		
 		for (unsigned int i = 0; i < meshModelMatrices3.size(); i++)
 		{
 			/*if (beta < 360.0f && beta >= 0.0f) {
@@ -384,6 +386,8 @@ int main(int argc, char** argv)
 			meshRenderer3.renderMesh();
 		}
 		
+
+
 		if (createSphr)
 		{
 			for (unsigned int i = 0; i < meshModelMatrices2.size(); i++)
@@ -396,7 +400,7 @@ int main(int argc, char** argv)
 				tempSphr.radius = radius;
 
 				meshSphr.push_back(tempSphr);
-				pos = nullptr;
+				
 				
 				
 
@@ -436,10 +440,14 @@ int main(int argc, char** argv)
 		modifiedCameraMatrix[3][2] = 0.0f;
 
 		glUniformMatrix4fv(skyboxCameraMatrixIDma, 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
-
 		glUniformMatrix4fv(skyboxModelMatrixIDma, 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+		glUniform3f(shaderLightColourIDma, 0, 0, 0);
+
 
 		skybox.render();
+
+		
+		
 
 		//square.draw();
 		glUseProgram(0);

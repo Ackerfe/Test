@@ -59,6 +59,12 @@
     <None Include="Skybox.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Fog.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Fog.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TextureVert.vert">

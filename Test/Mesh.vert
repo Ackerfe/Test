@@ -14,10 +14,13 @@ out vec3 VertexWorldPosition;
 out vec3 VertexToCamera;
 out vec3 LightToCamera;
 out vec3 VertexCameraNormal;
+out vec4 viewSpace;
 
 void main()
 {
-	gl_Position = Perspective * ModelMatrix * vec4(vertexPosition, 1.0);
+	viewSpace = CameraMatrix * ModelMatrix * vec4(vertexPosition,1.0);
+
+	gl_Position = Perspective * ModelMatrix * vec4(vertexPosition,1.0) ;
 	UV = vec2(vertexUV.x, 1.0 - vertexUV.y);
 
 	vec3 vertexCameraPosition = (CameraMatrix * ModelMatrix * vec4(vertexPosition, 1.0)).xyz;
@@ -29,4 +32,6 @@ void main()
 	VertexCameraNormal = (CameraMatrix * ModelMatrix * vec4(vertexNormal, 0)).xyz;
 
 	VertexWorldPosition = (ModelMatrix * vec4(vertexPosition, 1.0)).xyz;
+
+	
 }

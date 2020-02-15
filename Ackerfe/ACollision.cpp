@@ -5,7 +5,7 @@ namespace Ackerfe
 	bool sphrSphrColl(ACollSphr *first, ACollSphr *second)
 	{
 	
-		if (fabs((first->pos->x - second->pos->x) * (first->pos->x - second->pos->x) +
+		if (((first->pos->x - second->pos->x) * (first->pos->x - second->pos->x) +
 			(first->pos->y - second->pos->y) * (first->pos->y - second->pos->y) +
 			(first->pos->z - second->pos->z) * (first->pos->z - second->pos->z) < (first->radius + second->radius) * (first->radius + second->radius)))
 		{

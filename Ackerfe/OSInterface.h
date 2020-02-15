@@ -1,3 +1,4 @@
+#pragma comment(lib, "glu32.lib")
 #pragma once
 #include <SDL/SDL.h>
 #include <SDL/SDL_timer.h>

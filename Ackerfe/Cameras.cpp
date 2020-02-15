@@ -133,7 +133,7 @@ namespace Ackerfe
 
 	void Camera3D::update()
 	{	
-		std::cout << "      " << mSphr.pos->x << "      " << mSphr.pos->y << "      " << mSphr.pos->z;
+		
 		if (mLookAtReceiver.getMessage())
 		{
 			glm::vec2 mouseCoordsChange = mLookAtReceiver.getMouseMessage();
