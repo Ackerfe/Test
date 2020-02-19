@@ -11,131 +11,219 @@
     <Filter Include="Header Files\Global">
       <UniqueIdentifier>{2bb44fd7-150c-48a5-aee7-2dcf1111abe1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{8e0e6cbd-cb24-4f18-8da9-429f2f6f0690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Spatial">
+      <UniqueIdentifier>{033f7510-8dd9-4d7e-8a71-333a9efafc47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Spatial\Entities">
+      <UniqueIdentifier>{35c3c54b-dba7-434e-85a5-f3888376de47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{2676645e-8b60-48a3-a4bd-71eb953a6798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Audio\Headers">
+      <UniqueIdentifier>{8054b610-67ca-452a-9775-6b91d16b5a39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Audio\CPP">
+      <UniqueIdentifier>{77781423-10b6-4581-9a85-a0ec99ae3b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Global\Headers">
+      <UniqueIdentifier>{d987898d-d552-4126-8767-598aa0af48d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Global\CPP">
+      <UniqueIdentifier>{c41d0022-8fa4-4dda-8fe5-4263431b851a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\Headers">
+      <UniqueIdentifier>{92c455d1-9ee9-47ee-abd1-0805f3733db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graphics\CPP">
+      <UniqueIdentifier>{7c4d994d-c01b-44f8-bf26-96068e47bc9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input\Headers">
+      <UniqueIdentifier>{1b176caf-1d23-45ad-a421-3941919764a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input\CPP">
+      <UniqueIdentifier>{a9d9210c-a559-4dc8-93b3-eb6cc074e547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Spatial\Entities\Headers">
+      <UniqueIdentifier>{670f18f4-9a92-40be-a313-13661fa9721b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Spatial\Entities\CPP">
+      <UniqueIdentifier>{5a07c2b1-0cea-48b7-89e1-134ce2becf8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Spatial\Headers">
+      <UniqueIdentifier>{74ab9868-5870-4d97-94ea-fa64537d1802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Spatial\CPP">
+      <UniqueIdentifier>{35abaeb9-e0f0-41b7-abf1-b70823193bda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AAssImp.cpp" />
-    <ClCompile Include="AckerfeErrorHandler.cpp" />
-    <ClCompile Include="ACollision.cpp" />
-    <ClCompile Include="AMeshRenderer.cpp" />
-    <ClCompile Include="Cameras.cpp" />
-    <ClCompile Include="GUI.cpp" />
-    <ClCompile Include="ImageLoad.cpp" />
-    <ClCompile Include="InitFileReadWrite.cpp" />
-    <ClCompile Include="InputHandler.cpp" />
-    <ClCompile Include="Logostate.cpp" />
-    <ClCompile Include="LuaWrapper.cpp" />
-    <ClCompile Include="MessagingSystem.cpp" />
-    <ClCompile Include="OSInterface.cpp" />
-    <ClCompile Include="Particles.cpp" />
-    <ClCompile Include="PicoPNG.cpp" />
-    <ClCompile Include="ProgramClock.cpp" />
-    <ClCompile Include="SimpleShader.cpp" />
-    <ClCompile Include="Skybox.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="SpatialSceneGraphOct.cpp" />
-    <ClCompile Include="Square.cpp" />
-    <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="MultiSprite.cpp" />
-    <ClCompile Include="ErrHandler.cpp" />
-    <ClCompile Include="GraphicsResourceManager.cpp" />
-    <ClCompile Include="AAudio.cpp" />
-    <ClCompile Include="SpriteFont.cpp" />
-    <ClCompile Include="ACube.cpp" />
-    <ClCompile Include="SpatialEntity.cpp" />
+    <ClCompile Include="AAudio.cpp">
+      <Filter>Header Files\Audio\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="AAssImp.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="ACollision.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="AMeshRenderer.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsResourceManager.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoad.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="PicoPNG.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleShader.cpp">
+      <Filter>Header Files\Graphics\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="MessagingSystem.cpp">
+      <Filter>Header Files\Input\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Header Files\Input\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="OSInterface.cpp">
+      <Filter>Header Files\Global\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="InitFileReadWrite.cpp">
+      <Filter>Header Files\Global\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrHandler.cpp">
+      <Filter>Header Files\Global\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="LuaWrapper.cpp">
+      <Filter>Header Files\Global\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgramClock.cpp">
+      <Filter>Header Files\Global\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="ACube.cpp">
+      <Filter>Header Files\Spatial\Entities\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiSprite.cpp">
+      <Filter>Header Files\Spatial\Entities\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Particles.cpp">
+      <Filter>Header Files\Spatial\Entities\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Skybox.cpp">
+      <Filter>Header Files\Spatial\Entities\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
+      <Filter>Header Files\Spatial\Entities\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Header Files\Spatial\Entities\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteFont.cpp">
+      <Filter>Header Files\Spatial\Entities\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="SpatialEntity.cpp">
+      <Filter>Header Files\Spatial\CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="SpatialSceneGraphOct.cpp">
+      <Filter>Header Files\Spatial\CPP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AAssImp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Ackerfe.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AckerfeErrorHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ACollision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ACube.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AMeshRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cameras.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GUI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IAppState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageLoad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InitFileReadWrite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Logostate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LuaWrapper.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MessagingSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OSInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Particles.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PicoPNG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ProgramClock.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleShader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Skybox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpatialEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpatialSceneGraphOct.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Square.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiSprite.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="AAudio.h">
+      <Filter>Header Files\Audio\Headers</Filter>
     </ClInclude>
     <ClInclude Include="ErrHandler.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Global\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="InitFileReadWrite.h">
+      <Filter>Header Files\Global\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LuaWrapper.h">
+      <Filter>Header Files\Global\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="OSInterface.h">
+      <Filter>Header Files\Global\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgramClock.h">
+      <Filter>Header Files\Global\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AMeshRenderer.h">
+      <Filter>Header Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AAssImp.h">
+      <Filter>Header Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras.h">
+      <Filter>Header Files\Graphics\Headers</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsResourceManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Graphics\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="AAudio.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GUI.h">
+      <Filter>Header Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoad.h">
+      <Filter>Header Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PicoPNG.h">
+      <Filter>Header Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleShader.h">
+      <Filter>Header Files\Graphics\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files\Input\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MessagingSystem.h">
+      <Filter>Header Files\Input\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ACube.h">
+      <Filter>Header Files\Spatial\Entities\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiSprite.h">
+      <Filter>Header Files\Spatial\Entities\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles.h">
+      <Filter>Header Files\Spatial\Entities\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpatialEntity.h">
+      <Filter>Header Files\Spatial\Entities\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>Header Files\Spatial\Entities\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Header Files\Spatial\Entities\Headers</Filter>
     </ClInclude>
     <ClInclude Include="SpriteFont.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Spatial\Entities\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files\Spatial\Entities\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="SpatialSceneGraphOct.h">
+      <Filter>Header Files\Spatial\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ACollision.h">
+      <Filter>Header Files\Spatial\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files\Global\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Ackerfe.h">
+      <Filter>Header Files\Global\Headers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -144,12 +144,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameLogo.cpp" />
+    <ClCompile Include="InitShaders.cpp" />
+    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Billboard.frag" />
     <None Include="Billboard.vert" />
+    <None Include="Cloud.frag" />
+    <None Include="Cloud.vert" />
     <None Include="Fog.frag" />
     <None Include="Fog.vert" />
     <None Include="Logo.frag" />
@@ -171,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogo.h" />
+    <ClInclude Include="InitShaders.h" />
+    <ClInclude Include="Level1.h" />
     <ClInclude Include="MainMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

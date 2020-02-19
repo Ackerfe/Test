@@ -22,6 +22,7 @@
 #include "Particles.h"
 #include "Skybox.h"
 #include <random>
+#include "InitShaders.h"
 
 
 /*temporarily include iostream*/
@@ -82,33 +83,13 @@ int main(int argc, char** argv)
 	GLint shaderLightColourID = glGetUniformLocation(programID, "LightColour");
 	GLint shaderLightIntensityID = glGetUniformLocation(programID, "LightIntensity");
 
-	GLuint meshProgramID = Ackerfe::compileLinkSimpleShaders("Mesh.vert", "Mesh.frag");
-	GLint shaderPerspectiveIDm = glGetUniformLocation(meshProgramID, "Perspective");
-	GLint shaderCameraMatrixIDm = glGetUniformLocation(meshProgramID, "CameraMatrix");
-	GLint shaderModelMatrixIDm = glGetUniformLocation(meshProgramID, "ModelMatrix");
-	GLint shaderLightPositionIDm = glGetUniformLocation(meshProgramID, "LightPosition");
-	GLint shaderModelCameraMatrixIDm = glGetUniformLocation(meshProgramID, "ModelCameraMatrix");
-	GLint shaderLightColourIDm = glGetUniformLocation(meshProgramID, "LightColour");
-	GLint shaderLightIntensityIDm = glGetUniformLocation(meshProgramID, "LightIntensity");
-	
-
-	GLuint billboardProgramID = Ackerfe::compileLinkSimpleShaders("Billboard.vert", "Billboard.frag");
-	GLint shaderPerspectiveIDma = glGetUniformLocation(billboardProgramID, "Perspective");
-	GLint shaderCameraMatrixIDma = glGetUniformLocation(billboardProgramID, "CameraMatrix");
-	GLint shaderModelMatrixIDma = glGetUniformLocation(billboardProgramID, "ModelMatrix");
-	GLint shaderScaleID = glGetUniformLocation(billboardProgramID, "Scale");
-
-	GLuint skyboxProgramID = Ackerfe::compileLinkSimpleShaders("Skybox.vert", "Skybox.frag");
-	GLint skyboxPerspectiveIDma = glGetUniformLocation(skyboxProgramID, "Perspective");
-	GLint skyboxCameraMatrixIDma = glGetUniformLocation(skyboxProgramID, "CameraMatrix");
-	GLint skyboxModelMatrixIDma = glGetUniformLocation(skyboxProgramID, "ModelMatrix");
-	GLint shaderLightColourIDma = glGetUniformLocation(skyboxProgramID, "LightPosition");
-
+	Ackerfe::InitShaders shaderSet;
+	shaderSet.init();
 
 	Ackerfe::Camera2D camera2D(512, 512, glm::vec2(0.0f, 0.0f), 1.0f);
 	glm::mat4 ortho = camera2D.getMatrix();
 
-	Ackerfe::Camera3D camera3D(512, 512, glm::vec3(0.0f, 0.0f, 5.0f),
+	Ackerfe::Camera3D camera3D(512, 512, glm::vec3(0.0f, 0.0f, 0.0f),
 		45.0f, 1.0f, 10000.0f, glm::vec3(0.0f, 1.0f, 0.0f), &manager, 1.57f, 0.0f);
 
 	Ackerfe::Camera3D cameraCheck(512, 512, glm::vec3(0.0f, 0.0f, 0.0f),
@@ -194,6 +175,13 @@ int main(int argc, char** argv)
 	meshRenderer3.addMesh(test, textID);
 	meshRenderer3.prepareMesh();
 
+	Ackerfe::AMeshRenderer particlesRenderer;
+	particlesRenderer.init();
+	temp = "Meshes/SmallParticle.obj";
+	test = &temp[0];
+	particlesRenderer.addMesh(test, Ackerfe::loadPng("Texture/GateInside.png"));
+	particlesRenderer.prepareMesh();
+
 	std::vector<glm::mat4> meshModelMatrices;
 
 	/*for (float i = -10.0f; i < 10.0f; i += 5.0f)
@@ -215,6 +203,9 @@ int main(int argc, char** argv)
 	
 	std::vector<glm::mat4> meshModelMatrices2;
 	std::vector<const float*> vec;
+	
+	
+	
 	for (float k = -10.0f; k < 200.0f; k += 5.0f)
 	{
 		std::random_device rd; // obtain a random number from hardware
@@ -253,22 +244,27 @@ int main(int argc, char** argv)
 
 
 	Ackerfe::ParticleEmitterCone pEmit;
-	pEmit.init(glm::vec3(1.0f), 0.001f, glm::vec3(0.0f, 0.0f, 0.001f), 0.0005f,
-		1000, 100000);
+	pEmit.init(glm::vec3(900.0f, 0.0f, 900.0f), 0.1f, glm::vec3(0.0f, 0.0f, 0.01f), 0.005f,
+		10000, 5000);
+
+	Ackerfe::ParticleEmitterCone pEmit2;
+	pEmit2.init(glm::vec3(900.0f, 0.0f, 900.0f), 0.1f, glm::vec3(0.0f, 0.0f, -0.01f), 0.005f,
+		10000, 5000);
 
 	Ackerfe::Skybox skybox;
 	temp = "Meshes/skybox.obj";
 	test = &temp[0];
 	skybox.init(test,
-		"Texture/Skyboxes/Skybox2/right.png", "Texture/Skyboxes/Skybox2/left.png",
-		"Texture/Skyboxes/Skybox2/top.png", "Texture/Skyboxes/Skybox2/bottom.png",
-		"Texture/Skyboxes/Skybox2/front.png", "Texture/Skyboxes/Skybox2/back.png");
+		"Texture/Skyboxes/Skybox3/right.png", "Texture/Skyboxes/Skybox3/left.png",
+		"Texture/Skyboxes/Skybox3/top.png", "Texture/Skyboxes/Skybox3/bottom.png",
+		"Texture/Skyboxes/Skybox3/front.png", "Texture/Skyboxes/Skybox3/back.png");
 	skybox.prepare();
 
 	unsigned int lastTime = SDL_GetTicks();
 
 	float alpha = 0.0f;
 	float beta = 0.0f;
+	float gamma = 0.0f;
 	srand(time(NULL));
 	std::vector<Ackerfe::ACollSphr> meshSphr;
 	bool hit = false;
@@ -280,6 +276,48 @@ int main(int argc, char** argv)
 	Ackerfe::ACollSphr testingSphr;
 	testingSphr.pos = new glm::vec3(0.0f,0.0f,0.0f);
 	testingSphr.radius = 10.0f;
+
+
+	glm::mat4 tempMatrix(1.0f);
+
+	tempMatrix *= glm::scale(glm::mat4(1.0f), glm::vec3(3000.0f, 3000.0f, 3000.0f));
+	
+	tempMatrix *=glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 0.0f, 3.25f));
+	
+
+	
+
+
+	GLuint cloudID = Ackerfe::loadPng("Texture/Dust.png");
+	Ackerfe::AMeshRenderer cloudRenderer;
+	cloudRenderer.init();
+	temp = "Meshes/CloudGroup.obj";
+	test = &temp[0];
+	cloudRenderer.addMesh(test, cloudID);
+	cloudRenderer.prepareMesh();
+
+	Ackerfe::AMeshRenderer gateRenderer;
+	gateRenderer.init();
+	temp = "Meshes/JumpGate.obj";
+	test = &temp[0];
+	gateRenderer.addMesh(test, Ackerfe::loadPng("Texture/gateTexture.png"));
+	gateRenderer.prepareMesh();
+
+	Ackerfe::AMeshRenderer gateRingRenderer;
+	gateRingRenderer.init();
+	temp = "Meshes/JumpDisk.obj";
+	test = &temp[0];
+	gateRingRenderer.addMesh(test, Ackerfe::loadPng("Texture/GateInside.png"));
+	gateRingRenderer.prepareMesh();
+
+	glm::mat4 diskMatrix(1.0f);
+	diskMatrix *= glm::scale(glm::mat4(1.0f), glm::vec3(5.2f));
+	diskMatrix *= glm::translate(glm::mat4(1.0f), glm::vec3(173.0769f, 0.0f, 173.0769f));
+
+	glm::mat4 gateMatrix(1.0f);
+	gateMatrix *= glm::scale(glm::mat4(1.0f), glm::vec3(3.0f,3.0f,5.0f));
+	gateMatrix *= glm::translate(glm::mat4(1.0f), glm::vec3(300.0f, 0.0f,188.0f));
+
 	while (!quitCorrespondent.getMessage())
 	{
 		unsigned int deltaTime = SDL_GetTicks() - lastTime;
@@ -305,39 +343,32 @@ int main(int argc, char** argv)
 		//multiSprite3.renderBatches();
 		multiSprite2.renderBatches();
 
-		glUseProgram(meshProgramID);
+		glUseProgram(shaderSet.getMMeshProgramID());
 
-		glUniformMatrix4fv(shaderPerspectiveIDm, 1, GL_FALSE, &camera3D.getPerspectiveMatrix()[0][0]);
+		glUniformMatrix4fv(shaderSet.getMMeshPerspectiveID(), 1, GL_FALSE, &camera3D.getPerspectiveMatrix()[0][0]);
 
-		glUniformMatrix4fv(shaderCameraMatrixIDm, 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
-		glUniformMatrix4fv(shaderModelCameraMatrixIDm, 1, GL_FALSE, &camera3D.getModelCameraMatrix()[0][0]);
-		glUniform3f(shaderLightPositionIDm, -10000.0f, 0.05f, -1.5f);
-		glUniform3f(shaderLightColourIDm, 1.0f, 1.0f, 1.0f);
-		glUniform1f(shaderLightIntensityIDm, 9000000.0f);
+		glUniformMatrix4fv(shaderSet.getMMeshCameraMatrixID(), 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
+		glUniformMatrix4fv(shaderSet.getMMeshModelCameraMatrixID(), 1, GL_FALSE, &camera3D.getModelCameraMatrix()[0][0]);
+		glUniform3f(shaderSet.getMMeshLightPositionID(), -10000.0f, 0.05f, -1.5f);
+		glUniform3f(shaderSet.getMMeshLightColourID(), 1.0f, 1.0f, 1.0f);
+		glUniform1f(shaderSet.getMMeshLightIntensityID(), 9000000.0f);
+		glUniform3f(shaderSet.getMMeshEyePositionID(), camera3D.getPosition().x, camera3D.getPosition().y, camera3D.getPosition().z);
+		glUniformMatrix4fv(shaderSet.getMMeshModelMatrixID(), 1, GL_FALSE, &gateMatrix[0][0]);
+		gateRenderer.renderMesh();
+		
 
 
-		//glUseProgram(billboardProgramID);
-		//glUniformMatrix4fv(shaderPerspectiveIDma, 1, GL_FALSE, &camera3D.getProjectionMatrix()[0][0]);
-		//glUniformMatrix4fv(shaderCameraMatrixIDma, 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
-		//glUniform1f(shaderScaleID, 0.07f);
 
-		//pEmit.loopParticles(deltaTime);
-		//std::vector<glm::vec3> vector = pEmit.getParticlePosition();
-		//std::vector<glm::mat4> particleMatrices;
-
-		//for (unsigned int i = 0; i < vector.size(); i++)
-		//{
-		//	particleMatrices.push_back(glm::translate(glm::mat4(1.0f), vector[i]));
-		//}
+		
 
 
 		
 		for (unsigned int i = 0; i < meshModelMatrices3.size(); i++)
 		{
-			/*if (beta < 360.0f && beta >= 0.0f) {
+			if (beta < 360.0f && beta >= 0.0f) {
 
 				int randNum = (rand() % 3) + 1;
-				beta = 45.0f/50000.0f;
+				beta = 45.0f/500000.0f;
 
 				meshModelMatrices3[i] *= glm::mat4(
 					cos(beta), 0.0f, sin(beta), 0.0f,
@@ -347,18 +378,18 @@ int main(int argc, char** argv)
 
 				meshModelMatrices3[i] *= glm::mat4(1.0f);
 
-			}*/
-			//else beta = 0.0f;
-			glUniformMatrix4fv(shaderModelMatrixIDm, 1, GL_FALSE, &meshModelMatrices3[i][0][0]);
+			}
+			else beta = 0.0f;
+			glUniformMatrix4fv(shaderSet.getMMeshModelMatrixID(), 1, GL_FALSE, &meshModelMatrices3[i][0][0]);
 			meshRenderer.renderMesh();
 		}
 
 		for (unsigned int i = 0; i < meshModelMatrices2.size(); i++)
 		{
-			/*if (alpha < 360.0f && alpha >= 0.0f) {
+			if (alpha < 360.0f && alpha >= 0.0f) {
 
 			
-				alpha = 30.0f/100000.0f;
+				alpha = 30.0f/200000.0f;
 
 				meshModelMatrices2[i] *= glm::mat4(
 					1.0f, 0.0f, 0.0f, 0.0f,
@@ -368,27 +399,48 @@ int main(int argc, char** argv)
 
 				meshModelMatrices2[i] *= glm::mat4(1.0f);
 				
-			}*/
+			}
 			
 
-			glUniformMatrix4fv(shaderModelMatrixIDm, 1, GL_FALSE, &meshModelMatrices2[i][0][0]);
+			glUniformMatrix4fv(shaderSet.getMMeshModelMatrixID(), 1, GL_FALSE, &meshModelMatrices2[i][0][0]);
 
 			vec.push_back((const float*)glm::value_ptr(meshModelMatrices2[i]));
 
 			meshRenderer2.renderMesh();
 		}
 
+	
 
 		for (unsigned int i = 0; i < meshModelMatrices4.size(); i++)
 		{
+			if (gamma < 360.0f && gamma >= 0.0f) {
+
+
+				gamma = 90.0f / 500000.0f;
+
+				meshModelMatrices4[i] *= glm::mat4(
+					cos(gamma), -sin(gamma), 0.0f, 0.0f,
+					sin(gamma), cos(gamma), 0.0f, 0.0f,
+					0.0f, 0.0f, 1.0f, 0.0f,
+					0.0f, 0.0f, 0.0f, 1.0f);
+
+				meshModelMatrices4[i] *= glm::mat4(1.0f);
+
+			}
 			
-			glUniformMatrix4fv(shaderModelMatrixIDm, 1, GL_FALSE, &meshModelMatrices4[i][0][0]);
+			glUniformMatrix4fv(shaderSet.getMMeshModelMatrixID(), 1, GL_FALSE, &meshModelMatrices4[i][0][0]);
 			meshRenderer3.renderMesh();
+			
 		}
+
+		
+		
+			
+		
 		
 
 
-		if (createSphr)
+		/*if (createSphr)
 		{
 			for (unsigned int i = 0; i < meshModelMatrices2.size(); i++)
 			{
@@ -408,7 +460,7 @@ int main(int argc, char** argv)
 				//std::cout << vec[i][12] << "    " << vec[i][13] << "    " << vec[i][14] << std::endl;
 			}
 
-		}
+		}*/
 
 		if (printPos)
 		{
@@ -431,21 +483,104 @@ int main(int argc, char** argv)
 	
 		meshSphr.clear();
 
-		glUseProgram(skyboxProgramID);
-		glUniformMatrix4fv(skyboxPerspectiveIDma, 1, GL_FALSE, &camera3D.getProjectionMatrix()[0][0]);
+		glUseProgram(shaderSet.getMSkyboxProgramID());
+		glUniformMatrix4fv(shaderSet.getMSkyboxPerspectiveID(), 1, GL_FALSE, &camera3D.getProjectionMatrix()[0][0]);
 
 		glm::mat4 modifiedCameraMatrix = camera3D.getCameraMatrix();
 		modifiedCameraMatrix[3][0] = 0.0f;
 		modifiedCameraMatrix[3][1] = 0.0f;
 		modifiedCameraMatrix[3][2] = 0.0f;
 
-		glUniformMatrix4fv(skyboxCameraMatrixIDma, 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
-		glUniformMatrix4fv(skyboxModelMatrixIDma, 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
-		glUniform3f(shaderLightColourIDma, 0, 0, 0);
+		glUniformMatrix4fv(shaderSet.getMSkyboxCameraMatrixID(), 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
+		glUniformMatrix4fv(shaderSet.getMSkyboxModelMatrixID(), 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+		glUniform3f(shaderSet.getMSkyboxLightPositionID(), 0, 0, 0);
 
 
 		skybox.render();
 
+
+		glUseProgram(shaderSet.getMCloudProgramID());
+		glUniformMatrix4fv(shaderSet.getMCloudPerspectiveID(), 1, GL_FALSE, &camera3D.getPerspectiveMatrix()[0][0]);
+		glUniformMatrix4fv(shaderSet.getMCloudCameraMatrixID(), 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
+		glUniformMatrix4fv(shaderSet.getMCloudModelCameraMatrixID(), 1, GL_FALSE, &camera3D.getModelCameraMatrix()[0][0]);
+		
+		
+		for (unsigned int i = 0; i < 5; i++)
+		{
+			if (beta < 360.0f && beta >= 0.0f) {
+
+				int randNum = (rand() % 3) + 1;
+				alpha = 45.0f / 200000.0f;
+
+				
+				diskMatrix *= glm::rotate(glm::mat4(1.0f), alpha, glm::vec3(0.0f, 0.0f, 173.0769f));
+				diskMatrix *= glm::mat4(1.0f);
+				
+
+			}
+			glUniformMatrix4fv(shaderSet.getMCloudModelMatrixID(), 1, GL_FALSE, &diskMatrix[0][0]);
+			glUniform1f(shaderSet.getMCloudTransparencyID(), 0.15f);
+			gateRingRenderer.renderMesh();
+		}
+		
+		for (unsigned int i = 0; i < 5; i++)
+		{
+			if (beta < 360.0f && beta >= 0.0f) {
+
+				int randNum = (rand() % 3) + 1;
+				beta = 45.0f/400000.0f;
+
+				tempMatrix *= glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 0.0f, -3.25f));
+				tempMatrix *= glm::mat4(
+					cos(beta), 0.0f, sin(beta), 0.0f,
+					0.0f, 1.0f, 0.0f, 0.0f,
+					-sin(beta), 0.0f, cos(beta), 0.0f,
+					0.0f, 0.0f, 0.0f, 1.0f);
+
+				tempMatrix *= glm::mat4(1.0f);
+				tempMatrix *= glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 0.0f, 3.25f));
+
+			}
+			glUniform1f(shaderSet.getMCloudTransparencyID(), 0.08f);
+			glUniformMatrix4fv(shaderSet.getMCloudModelMatrixID(), 1, GL_FALSE, &tempMatrix[0][0]);
+			cloudRenderer.renderMesh();
+		}
+
+
+		glUseProgram(shaderSet.getMBillboardProgramID());
+		glUniformMatrix4fv(shaderSet.getMBillboardPerspectiveID(), 1, GL_FALSE, &camera3D.getProjectionMatrix()[0][0]);
+		glUniformMatrix4fv(shaderSet.getMBillboardCameraMatrixID(), 1, GL_FALSE, &camera3D.getCameraMatrix()[0][0]);
+		glUniform1f(shaderSet.getMBillboardScaleID(), 0.1f);
+
+		pEmit.loopParticles(deltaTime);
+		std::vector<glm::vec3> vector = pEmit.getParticlePosition();
+		std::vector<glm::mat4> particleMatrices;
+
+		for (unsigned int i = 0; i < vector.size(); i++)
+		{
+			particleMatrices.push_back(glm::translate(glm::mat4(1.0f), vector[i]));
+		}
+		pEmit2.loopParticles(deltaTime);
+		std::vector<glm::vec3> vector2 = pEmit2.getParticlePosition();
+		std::vector<glm::mat4> particleMatrices2;
+
+		for (unsigned int i = 0; i < vector2.size(); i++)
+		{
+			particleMatrices2.push_back(glm::translate(glm::mat4(1.0f), vector2[i]));
+		}
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		for (unsigned int i = 0; i < particleMatrices.size(); i++)
+		{
+			glUniformMatrix4fv(shaderSet.getMBillboardModelMatrixID(), 1, GL_FALSE, &particleMatrices[i][0][0]);
+			particlesRenderer.renderMesh();
+		}
+		for (unsigned int i = 0; i < particleMatrices2.size(); i++)
+		{
+			glUniformMatrix4fv(shaderSet.getMBillboardModelMatrixID(), 1, GL_FALSE, &particleMatrices2[i][0][0]);
+			particlesRenderer.renderMesh();
+		}
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		
 		
 		
 

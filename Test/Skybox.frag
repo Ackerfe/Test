@@ -21,7 +21,7 @@ const float FogDensity = 0.005;
 void main()
 {
 	vec4 colour = texture(cubemapTexture, TexCoord0);
-	vec4 fogColor = vec4(0.5, 0.5,0.6, 1.0);
+	vec4 fogColor = vec4(0.67451, 0.25098,0.74118, 1.0);
 	vec3 L = normalize( LightPosition - VertexWorldPosition);
 	vec3 V = normalize( LightPosition - VertexWorldPosition);
  
@@ -47,12 +47,12 @@ void main()
 
  
 	// 20 - fog starts; 80 - fog ends
-	fogFactor = (800 - dist)/(800 - 1000);
+	fogFactor = (800 - dist)/(800 - 2000);
 	fogFactor = clamp( fogFactor, 0.0, 1.0 );
  
 	//if you inverse color in glsl mix function you have to
 	 //put 1.0 - fogFactor
-	 finalColor = mix(colour, fogColor, vec4(1.0-fogFactor));
+	 finalColor = mix(colour, fogColor, vec4(fogFactor));
  
 	//show fogFactor depth(gray levels)
 	//fogFactor = 1 - fogFactor;

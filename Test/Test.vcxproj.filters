@@ -24,6 +24,12 @@
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InitShaders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SimpleVert.vert">
@@ -39,9 +45,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Logo.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="Mesh.frag">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Mesh.vert">
@@ -63,6 +66,15 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Fog.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Mesh.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Cloud.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="Cloud.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
@@ -88,6 +100,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InitShaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

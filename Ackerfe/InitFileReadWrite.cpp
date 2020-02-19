@@ -1,6 +1,6 @@
 #include "InitFileReadWrite.h"
 #include <fstream>
-#include "AckerfeErrorHandler.h"
+#include "ErrHandler.h"
 namespace Ackerfe
 {
 

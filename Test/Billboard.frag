@@ -9,4 +9,5 @@ out vec4 colour;
 void main()
 {
 	colour = texture( myTextureSampler, UV );
+
 }

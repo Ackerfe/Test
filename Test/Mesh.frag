@@ -18,8 +18,8 @@ uniform vec3 eye_position;
 //can pass them as uniforms
 const vec3 DiffuseLight = vec3(0.01, 0.01, 0.01);
 const vec3 RimColor = vec3(0.3, 0.3, 0.5);
-const vec3 fogColor = vec3(0.5, 0.5,0.6);
-const float FogDensity = 0.05;
+const vec3 fogColor = vec3(0.33333, 0.10588,0.19215);
+const float FogDensity = 0.5;
 
 
 void main()
@@ -28,7 +28,7 @@ void main()
 	vec3 MaterialAmbientColour = vec3(0.5,0.5,0.5) * MaterialDiffuseColour;
 	vec3 MaterialSpecularColour = vec3(0.3,0.3,0.3);
 
-	float distance = length(LightPosition - VertexWorldPosition);
+	float distance1 = length(eye_position - VertexWorldPosition);
 
 	vec3 vertexCameraNormal = normalize(VertexCameraNormal);
 	vec3 pixelToLight = normalize(LightToCamera);
@@ -40,7 +40,7 @@ void main()
 
 	vec3 L = normalize( LightPosition - VertexWorldPosition);
 	vec3 V = normalize( LightPosition - VertexWorldPosition);
- 
+
 	//diffuse lighting
 	vec3 diffuse = DiffuseLight * max(0, dot(L,VertexCameraNormal));
  
@@ -63,7 +63,7 @@ void main()
 
  
 	// 20 - fog starts; 80 - fog ends
-	fogFactor = (30 - dist)/(30 - 1000);
+	fogFactor = log((dist * FogDensity))/8;
 	fogFactor = clamp( fogFactor, 0.0, 1.0 );
  
 	//if you inverse color in glsl mix function you have to
