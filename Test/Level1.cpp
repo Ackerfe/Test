@@ -8,7 +8,7 @@
 #include <glm-0.9.9.7/glm/gtx/euler_angles.hpp>
 #include <glm-0.9.9.7/glm/gtc/type_ptr.hpp>
 
-void Level1::init(Ackerfe::Camera3D &camera, Ackerfe::InitShaders &shaderSet, int screenWidth, int screenHeight, Ackerfe::OSInterface * window, Ackerfe::GUI * gui, Ackerfe::InputHandler* input)
+void Level1::init(Ackerfe::Camera3D* camera, Ackerfe::InitShaders* shaderSet, int screenWidth, int screenHeight, Ackerfe::OSInterface * window, Ackerfe::GUI * gui, Ackerfe::InputHandler* input)
 {
 		mScreenWidth = screenWidth;
 		mScreenHeight = screenHeight;
@@ -17,6 +17,20 @@ void Level1::init(Ackerfe::Camera3D &camera, Ackerfe::InitShaders &shaderSet, in
 		mWindow = window;
 		mGUI = gui;
 		mInput = input;
+
+		FMOD::System_Create(&mSystem);
+		mSystem->init(8, FMOD_INIT_NORMAL, NULL);
+		std::string tempString = "SoundEffects/Music/Background1.mp3";
+		mSystem->createSound(tempString.c_str(), FMOD_DEFAULT, NULL, &mNewSound1);
+		tempString = "SoundEffects/Music/Background2.mp3";
+		mSystem->createSound(tempString.c_str(), FMOD_DEFAULT, NULL, &mNewSound2);
+		tempString = "SoundEffects/Music/Background3.mp3";
+		mSystem->createSound(tempString.c_str(), FMOD_DEFAULT, NULL, &mNewSound3);
+		mSystem->createSoundGroup("Test",&mSoundGroup);
+		mNewSound1->setSoundGroup(mSoundGroup);
+		mNewSound2->setSoundGroup(mSoundGroup);
+		mNewSound3->setSoundGroup(mSoundGroup);
+		
 
 		for (float k = -10.0f; k < 200.0f; k += 5.0f)
 		{
@@ -105,8 +119,6 @@ void Level1::init(Ackerfe::Camera3D &camera, Ackerfe::InitShaders &shaderSet, in
 		mAsteroid1.addMesh(test, Ackerfe::loadPng("Texture/asteroidTexture.png"));
 		mAsteroid1.prepareMesh();
 
-
-		
 		mGateRingMatrix *= glm::scale(glm::mat4(1.0f), glm::vec3(5.2f));
 		mGateRingMatrix *= glm::translate(glm::mat4(1.0f), glm::vec3(173.0769f, 0.0f, 173.0769f));
 
@@ -124,20 +136,33 @@ void Level1::level1Loop()
 
 	while (mTravel == false)
 	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		unsigned int deltaTime = SDL_GetTicks() - lastTime;
 		lastTime = SDL_GetTicks();
 
-		mCamera.update();
+		if (!mAudioFlag)
+		{
+			mSoundGroup->getNumPlaying(&mNum);
+			if (mNum == 0)
+				mSystem->playSound(mNewSound1,NULL,false,NULL);
+			if (mNum != 0)
+				mSystem->release();
+			
+			std::cout << mNum <<std::endl;
+		}
+		mSystem->update();
+		mCamera->update();
+		mGUI->update();
 
-		glUseProgram(mShaderSet.getMMeshProgramID());
-		glUniformMatrix4fv(mShaderSet.getMMeshPerspectiveID(), 1, GL_FALSE, &mCamera.getPerspectiveMatrix()[0][0]);
-		glUniformMatrix4fv(mShaderSet.getMMeshCameraMatrixID(), 1, GL_FALSE, &mCamera.getCameraMatrix()[0][0]);
-		glUniformMatrix4fv(mShaderSet.getMMeshModelCameraMatrixID(), 1, GL_FALSE, &mCamera.getModelCameraMatrix()[0][0]);
-		glUniform3f(mShaderSet.getMMeshLightPositionID(), -10000.0f, 0.05f, -1.5f);
-		glUniform3f(mShaderSet.getMMeshLightColourID(), 1.0f, 1.0f, 1.0f);
-		glUniform1f(mShaderSet.getMMeshLightIntensityID(), 9000000.0f);
-		glUniform3f(mShaderSet.getMMeshEyePositionID(), mCamera.getPosition().x, mCamera.getPosition().y, mCamera.getPosition().z);
-		glUniformMatrix4fv(mShaderSet.getMMeshModelMatrixID(), 1, GL_FALSE, &mGateMatrix[0][0]);
+		glUseProgram(mShaderSet->getMMeshProgramID());
+		glUniformMatrix4fv(mShaderSet->getMMeshPerspectiveID(), 1, GL_FALSE, &mCamera->getPerspectiveMatrix()[0][0]);
+		glUniformMatrix4fv(mShaderSet->getMMeshCameraMatrixID(), 1, GL_FALSE, &mCamera->getCameraMatrix()[0][0]);
+		glUniformMatrix4fv(mShaderSet->getMMeshModelCameraMatrixID(), 1, GL_FALSE, &mCamera->getModelCameraMatrix()[0][0]);
+		glUniform3f(mShaderSet->getMMeshLightPositionID(), -10000.0f, 0.05f, -1.5f);
+		glUniform3f(mShaderSet->getMMeshLightColourID(), 1.0f, 1.0f, 1.0f);
+		glUniform1f(mShaderSet->getMMeshLightIntensityID(), 9000000.0f);
+		glUniform3f(mShaderSet->getMMeshEyePositionID(), mCamera->getPosition().x, mCamera->getPosition().y, mCamera->getPosition().z);
+		glUniformMatrix4fv(mShaderSet->getMMeshModelMatrixID(), 1, GL_FALSE, &mGateMatrix[0][0]);
 		mGate.renderMesh();
 
 		for (unsigned int i = 0; i < mAsteroidModelMatrices1.size(); i++)
@@ -152,7 +177,7 @@ void Level1::level1Loop()
 
 			mAsteroidModelMatrices1[i] *= glm::mat4(1.0f);
 
-			glUniformMatrix4fv(mShaderSet.getMMeshModelMatrixID(), 1, GL_FALSE, &mAsteroidModelMatrices1[i][0][0]);
+			glUniformMatrix4fv(mShaderSet->getMMeshModelMatrixID(), 1, GL_FALSE, &mAsteroidModelMatrices1[i][0][0]);
 			mAsteroid1.renderMesh();
 		}
 
@@ -168,7 +193,7 @@ void Level1::level1Loop()
 
 			mAsteroidModelMatrices2[i] *= glm::mat4(1.0f);
 
-			glUniformMatrix4fv(mShaderSet.getMMeshModelMatrixID(), 1, GL_FALSE, &mAsteroidModelMatrices2[i][0][0]);
+			glUniformMatrix4fv(mShaderSet->getMMeshModelMatrixID(), 1, GL_FALSE, &mAsteroidModelMatrices2[i][0][0]);
 
 			mAsteroid2.renderMesh();
 		}
@@ -188,29 +213,29 @@ void Level1::level1Loop()
 
 			
 
-			glUniformMatrix4fv(mShaderSet.getMMeshModelMatrixID(), 1, GL_FALSE, &mAsteroidModelMatrices3[i][0][0]);
+			glUniformMatrix4fv(mShaderSet->getMMeshModelMatrixID(), 1, GL_FALSE, &mAsteroidModelMatrices3[i][0][0]);
 			mAsteroid3.renderMesh();
 
 		}
 
-		glUseProgram(mShaderSet.getMSkyboxProgramID());
-		glUniformMatrix4fv(mShaderSet.getMSkyboxPerspectiveID(), 1, GL_FALSE, &mCamera.getProjectionMatrix()[0][0]);
+		glUseProgram(mShaderSet->getMSkyboxProgramID());
+		glUniformMatrix4fv(mShaderSet->getMSkyboxPerspectiveID(), 1, GL_FALSE, &mCamera->getProjectionMatrix()[0][0]);
 
-		glm::mat4 modifiedCameraMatrix = mCamera.getCameraMatrix();
+		glm::mat4 modifiedCameraMatrix = mCamera->getCameraMatrix();
 		modifiedCameraMatrix[3][0] = 0.0f;
 		modifiedCameraMatrix[3][1] = 0.0f;
 		modifiedCameraMatrix[3][2] = 0.0f;
 
-		glUniformMatrix4fv(mShaderSet.getMSkyboxCameraMatrixID(), 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
-		glUniformMatrix4fv(mShaderSet.getMSkyboxModelMatrixID(), 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
-		glUniform3f(mShaderSet.getMSkyboxLightPositionID(), 0, 0, 0);
+		glUniformMatrix4fv(mShaderSet->getMSkyboxCameraMatrixID(), 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
+		glUniformMatrix4fv(mShaderSet->getMSkyboxModelMatrixID(), 1, GL_FALSE, &glm::mat4(1.0f)[0][0]);
+		glUniform3f(mShaderSet->getMSkyboxLightPositionID(), 0, 0, 0);
 
 		mSkybox.render();
 
-		glUseProgram(mShaderSet.getMCloudProgramID());
-		glUniformMatrix4fv(mShaderSet.getMCloudPerspectiveID(), 1, GL_FALSE, &mCamera.getPerspectiveMatrix()[0][0]);
-		glUniformMatrix4fv(mShaderSet.getMCloudCameraMatrixID(), 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
-		glUniformMatrix4fv(mShaderSet.getMCloudModelCameraMatrixID(), 1, GL_FALSE, &mCamera.getModelCameraMatrix()[0][0]);
+		glUseProgram(mShaderSet->getMCloudProgramID());
+		glUniformMatrix4fv(mShaderSet->getMCloudPerspectiveID(), 1, GL_FALSE, &mCamera->getPerspectiveMatrix()[0][0]);
+		glUniformMatrix4fv(mShaderSet->getMCloudCameraMatrixID(), 1, GL_FALSE, &modifiedCameraMatrix[0][0]);
+		glUniformMatrix4fv(mShaderSet->getMCloudModelCameraMatrixID(), 1, GL_FALSE, &mCamera->getModelCameraMatrix()[0][0]);
 
 
 		for (unsigned int i = 0; i < 5; i++)
@@ -222,15 +247,15 @@ void Level1::level1Loop()
 
 
 			
-			glUniformMatrix4fv(mShaderSet.getMCloudModelMatrixID(), 1, GL_FALSE, &mGateRingMatrix[0][0]);
-			glUniform1f(mShaderSet.getMCloudTransparencyID(), 0.15f);
+			glUniformMatrix4fv(mShaderSet->getMCloudModelMatrixID(), 1, GL_FALSE, &mGateRingMatrix[0][0]);
+			glUniform1f(mShaderSet->getMCloudTransparencyID(), 0.15f);
 			mGateRing.renderMesh();
 		}
 
 		for (unsigned int i = 0; i < 5; i++)
 		{
 			
-			float beta = 45.0f / 400000.0f;
+			float beta = 45.0f / 4000000.0f;
 
 			mCloudMatrix *= glm::translate(glm::mat4(1.0f), glm::vec3(4.0f, 0.0f, -3.25f));
 			mCloudMatrix *= glm::mat4(
@@ -243,15 +268,15 @@ void Level1::level1Loop()
 			mCloudMatrix *= glm::translate(glm::mat4(1.0f), glm::vec3(-4.0f, 0.0f, 3.25f));
 
 			
-			glUniform1f(mShaderSet.getMCloudTransparencyID(), 0.08f);
-			glUniformMatrix4fv(mShaderSet.getMCloudModelMatrixID(), 1, GL_FALSE, &mCloudMatrix[0][0]);
+			glUniform1f(mShaderSet->getMCloudTransparencyID(), 0.08f);
+			glUniformMatrix4fv(mShaderSet->getMCloudModelMatrixID(), 1, GL_FALSE, &mCloudMatrix[0][0]);
 			mCloud.renderMesh();
 		}
 
-		glUseProgram(mShaderSet.getMBillboardProgramID());
-		glUniformMatrix4fv(mShaderSet.getMBillboardPerspectiveID(), 1, GL_FALSE, &mCamera.getProjectionMatrix()[0][0]);
-		glUniformMatrix4fv(mShaderSet.getMBillboardCameraMatrixID(), 1, GL_FALSE, &mCamera.getCameraMatrix()[0][0]);
-		glUniform1f(mShaderSet.getMBillboardScaleID(), 0.1f);
+		glUseProgram(mShaderSet->getMBillboardProgramID());
+		glUniformMatrix4fv(mShaderSet->getMBillboardPerspectiveID(), 1, GL_FALSE, &mCamera->getProjectionMatrix()[0][0]);
+		glUniformMatrix4fv(mShaderSet->getMBillboardCameraMatrixID(), 1, GL_FALSE, &mCamera->getCameraMatrix()[0][0]);
+		glUniform1f(mShaderSet->getMBillboardScaleID(), 0.1f);
 
 		mGateParticles1.loopParticles(deltaTime);
 		std::vector<glm::vec3> vector = mGateParticles1.getParticlePosition();
@@ -272,18 +297,19 @@ void Level1::level1Loop()
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		for (unsigned int i = 0; i < particleMatrices.size(); i++)
 		{
-			glUniformMatrix4fv(mShaderSet.getMBillboardModelMatrixID(), 1, GL_FALSE, &particleMatrices[i][0][0]);
+			glUniformMatrix4fv(mShaderSet->getMBillboardModelMatrixID(), 1, GL_FALSE, &particleMatrices[i][0][0]);
 			mGateParticles.renderMesh();
 		}
 		for (unsigned int i = 0; i < particleMatrices2.size(); i++)
 		{
-			glUniformMatrix4fv(mShaderSet.getMBillboardModelMatrixID(), 1, GL_FALSE, &particleMatrices2[i][0][0]);
+			glUniformMatrix4fv(mShaderSet->getMBillboardModelMatrixID(), 1, GL_FALSE, &particleMatrices2[i][0][0]);
 			mGateParticles.renderMesh();
 		}
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glUseProgram(0);
 		mInput->inputQueue();
 		mWindow->swapBuffer();
+		
 	}
 }
 

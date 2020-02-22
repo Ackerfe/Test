@@ -15,16 +15,22 @@ class Level1
 {
 	Ackerfe::GUI* mGUI;
 	bool mTravel = false;
+	bool mAudioFlag = false;
 
 	int mScreenWidth;
 	int mScreenHeight;
 
-	Ackerfe::Camera3D mCamera;
+	Ackerfe::Camera3D* mCamera;
 	Ackerfe::OSInterface* mWindow;
 	Ackerfe::InputHandler* mInput = nullptr;
-	Ackerfe::InitShaders mShaderSet;
-	FMOD::Sound* mNewSound;
+	Ackerfe::InitShaders* mShaderSet;
+	FMOD::Sound* mNewSound1;
+	FMOD::Sound* mNewSound2;
+	FMOD::Sound* mNewSound3;
+	FMOD::SoundGroup* mSoundGroup;
 	FMOD::System* mSystem;
+	FMOD::Channel* mChannel;
+	int mNum;
 
 	Ackerfe::AMeshRenderer mAsteroid1;
 	Ackerfe::AMeshRenderer mAsteroid2;
@@ -49,7 +55,11 @@ class Level1
 	std::vector<glm::mat4> mAsteroidModelMatrices2;
 	std::vector<glm::mat4> mAsteroidModelMatrices3;
 public:
-	void init(Ackerfe::Camera3D &camera, Ackerfe::InitShaders &shaderSet, int screenWidth, int screenHeight, Ackerfe::OSInterface* window, Ackerfe::GUI* gui, Ackerfe::InputHandler* input);
+
+	Level1() {}
+	~Level1() {}
+
+	void init(Ackerfe::Camera3D* camera, Ackerfe::InitShaders* shaderSet, int screenWidth, int screenHeight, Ackerfe::OSInterface* window, Ackerfe::GUI* gui, Ackerfe::InputHandler* input);
 	void level1Loop();
 	void render();
 	bool setTravel();

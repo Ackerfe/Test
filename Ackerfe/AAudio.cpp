@@ -96,4 +96,19 @@ namespace Ackerfe
 			mSoundMap[i].update();
 		}
 	}
+
+	FMOD_RESULT F_CALLBACK AAudio::EndOfSong(FMOD_CHANNELCONTROL*channelControl, FMOD_CHANNELCONTROL_TYPE controlType,
+		FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType, void*commanData1, void*commanData2)
+	{
+		if (controlType == FMOD_CHANNELCONTROL_CHANNEL && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END) {
+			//se è un singolo channel è non un channel group e se la callback è chiamata quanto è finita la riproduzione del suono
+
+			FMOD::Channel*channel = (FMOD::Channel*)channelControl;
+
+			
+		}
+
+
+		return FMOD_OK;
+	}
 }

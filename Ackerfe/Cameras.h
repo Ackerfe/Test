@@ -70,6 +70,7 @@ namespace Ackerfe
 		ACollSphr mSphr;
 		
 	public:
+		Camera3D() {}
 		Camera3D(int screenWidth, int screenHeight, glm::vec3 position, float fieldOfView, float near, float far, glm::vec3 cameraRoll, CorrespondentManager* corrManager, float hAngle, float vAngle);
 		~Camera3D();
 
